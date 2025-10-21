@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --index: 1vh + 1vw;
+  --color-header: #f4efec;
+  --color-text: #cdc6c3;
+  --gallery-gap: calc(var(--index) * 10);
+}
+
+h1,
+h2,
+h3,
+h4.h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* will-change */
+.welcome-content,
+.hero,
+.main-header,
+.gallery > * {
+  will-change: transform;
+}
+
+body {
+  background-image: url(/public/static/background-hero.jpg);
+  background-size: 9000px;
+  color: #fafafa;
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+}
