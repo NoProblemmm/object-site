@@ -1,12 +1,21 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { routeTree } from "./routeTree.gen";
 
-import { Welcome } from "./pages/welcome/Welcome";
+import { createRouter, RouterProvider } from "@tanstack/react-router";
 import "./styles/index.css";
 import "./styles/normalize.css";
 
+const loading = <div>Loading</div>;
+
+export const router = createRouter({
+  routeTree,
+  defaultPendingMinMs: 500,
+  defaultPendingComponent: () => loading,
+});
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Welcome />
+    <RouterProvider router={router} />
   </StrictMode>
 );

@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.card__container {
+  flex: 1;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  padding: 20vh 0 20vh 0;
+}
