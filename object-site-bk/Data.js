@@ -13,7 +13,7 @@ export const Track = [
     name: "Track 1",
     author: "NoNmae",
     image: null,
-    url: "track",
+    url: "track1.mp3 ",
   },
 ];
 
