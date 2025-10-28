@@ -2,10 +2,12 @@ import { LoadingStyles } from "./scripts/LoadingStyles";
 import { useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import "./Head.css";
+import { observer } from "mobx-react-lite";
 
 interface ILink {
   name: string;
   link: string;
+  callback?: () => Promise<void>;
 }
 
 type TLink = {
@@ -27,9 +29,14 @@ export const Header = ({ links }: TLink) => {
             <a
               key={index}
               className="navigate__link"
-              onClick={(event) => {
-                event.preventDefault();
-                navigate({ to: link.link });
+              onClick={(e) => {
+                e.preventDefault();
+                if (link.callback) {
+                  link.callback();
+                  navigate({ to: link.link });
+                } else if (link.link) {
+                  navigate({ to: link.link });
+                }
               }}
             >
               {link.name}
