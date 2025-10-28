@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
 
@@ -14,8 +14,12 @@ export const router = createRouter({
   defaultPendingComponent: () => loading,
 });
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+const RootApp = () => {
+  return (
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  );
+};
+
+createRoot(document.getElementById("root")!).render(<RootApp />);
