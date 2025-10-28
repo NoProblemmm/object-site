@@ -1,0 +1,48 @@
+.signin__container {
+  display: flex;
+  width: 100%;
+  height: 50rem;
+  justify-content: center;
+  align-items: center;
+}
+.signin__card {
+  display: block;
+  width: 30rem;
+  height: auto;
+}
+
+.form__signin {
+  display: block;
+}
+
+.form__signin > input {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.form__error {
+  color: #b40000;
+  margin-bottom: 1rem;
+}
+
+.form__button > button {
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 80%;
+}
+
+.form__button {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.form__option {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.form__option:hover {
+  color: #616161;
+}
