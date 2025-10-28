@@ -10,11 +10,11 @@ export const LoadingStyles = () => {
 
   ScrollTrigger.create({
     start: 0,
-    end: () => ScrollTrigger.maxScroll(window) - 2, // just above the bottom of the page
+    end: () => ScrollTrigger.maxScroll(window) - 2,
     onUpdate: (self) => {
       self.direction === 1 ? showHeader.reverse() : showHeader.play();
     },
-    onLeave: () => showHeader.play(), // we're at the bottom of the page
+    onLeave: () => showHeader.play(),
   });
   return () => {
     if (showHeader) {
