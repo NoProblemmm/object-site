@@ -16,7 +16,7 @@ export const Track = [
     name: "Track 1",
     author: "NoNmae",
     time: "02:49",
-    image: `${process.env.BASE_URL}/media/retro-design-2.jpg`,
+    image: `${process.env.BASE_URL}/media/track-1.jpg`,
     url: `${process.env.BASE_URL}/media/track-1.mp3`,
   },
   {
@@ -24,7 +24,7 @@ export const Track = [
     name: "Track 2",
     author: "NoNmae 2",
     time: "02:06",
-    image: `${process.env.BASE_URL}/media/retro-design-3.jpg`,
+    image: `${process.env.BASE_URL}/media/track-2.jpg`,
     url: `${process.env.BASE_URL}/media/track-2.mp3`,
   },
   {
@@ -43,6 +43,14 @@ export const Track = [
     image: `${process.env.BASE_URL}/media/track-4.jpg`,
     url: `${process.env.BASE_URL}/media/track-4.mp3`,
   },
+  {
+    id: 5,
+    name: "DAO",
+    author: "Miyagi feat. HLOY, даена",
+    time: "03:42",
+    image: `${process.env.BASE_URL}/media/track-5.jpg`,
+    url: `${process.env.BASE_URL}/media/track-5.mp3`,
+  },
 ];
 
 export const UserTrack = [
@@ -52,7 +60,7 @@ export const UserTrack = [
   },
   {
     idUser: 1,
-    idTrack: 2,
+    idTrack: 3,
   },
 ];
 
