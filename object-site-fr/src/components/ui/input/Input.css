@@ -1,0 +1,13 @@
+.input__style {
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  border: 0px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  outline: none;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.input__style:focus {
+  box-shadow: 0 0 15px rgba(0, 38, 255, 0.486);
+}
