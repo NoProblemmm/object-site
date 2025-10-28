@@ -1,28 +1,31 @@
-import { makeAutoObservable } from "mobx";
-import { type IPlayerStates } from "./Player.type";
+import { makeAutoObservable, runInAction } from "mobx";
+import { type IPlayerStates, type ITrack } from "./Player.type";
+import { Api } from "../../api/Api";
 
 export class PlayerStore implements IPlayerStates {
   isPlaying = false;
   volume = 50;
   trackIndex = 0;
-  tracks = [
-    {
-      name: "track-1",
-      author: "Net",
-      image: "/static/retro-design-1.jpg",
-      url: "tracks/track-1.mp3",
-    },
-    {
-      name: "track-2",
-      author: "Secret",
-      image: "/static/retro-design-2.jpg",
-      url: "tracks/track-2.mp3",
-    },
-  ];
+  tracks: ITrack[] = [];
+  myTracks: ITrack[] = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, { autoBind: true });
   }
+
+  public getTrackStore = async () => {
+    const response = await Api().getTrack();
+    runInAction(() => {
+      this.tracks = response as ITrack[];
+    });
+  };
+
+  public getMyTrack = async () => {
+    const response = await Api().getMyTrack();
+    runInAction(() => {
+      this.myTracks = response as ITrack[];
+    });
+  };
 
   togglePlayPause() {
     this.isPlaying = !this.isPlaying;
@@ -30,6 +33,11 @@ export class PlayerStore implements IPlayerStates {
 
   changeVolume(newVolume: any) {
     this.volume = newVolume;
+  }
+
+  public selectTrack(index: number) {
+    this.trackIndex = index;
+    this.isPlaying = true;
   }
 
   nextTrack() {

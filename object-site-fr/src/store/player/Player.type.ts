@@ -1,10 +1,19 @@
 export interface IPlayerStates extends IPlayerState, IPlayerMethods {}
 
+export interface ITrack {
+  id: number;
+  name: string;
+  author: string;
+  time: string;
+  url: string;
+  image?: string;
+}
+
 export interface IPlayerState {
   isPlaying: boolean;
   volume: number;
   trackIndex: number;
-  tracks: Array<object>;
+  tracks: ITrack[];
 }
 
 export interface IPlayerMethods {
