@@ -1,0 +1,20 @@
+.button__style {
+  outline: none;
+  border: 0px;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.05s ease;
+}
+
+.button__style:hover {
+  box-shadow: 0 0 5px rgba(0, 38, 255, 0.486);
+  transform: scale(1.02);
+}
+
+.async__button {
+}
