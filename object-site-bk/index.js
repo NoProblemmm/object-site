@@ -1,32 +1,43 @@
 import express from "express";
-import { authorizeUser } from "./authorization.js";
+import { login, myTrack, refreshMyToken, track } from "./src/path/path.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import { Track, UserTrack } from "./Data.js";
 import dotenv from "dotenv";
+import { authenticateJWT } from "./src/common/token/Token.js";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: `http://localhost:5173`,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  "/media",
+  express.static("media/tracks/"),
+  express.static("media/imageTrack/")
+);
 
 app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  const result = authorizeUser(email, password);
+  login(req, res);
+});
 
-  if (result.success) {
-    res.json({
-      accessToken: result.accessToken,
-      refreshToken: result.refreshToken,
-    });
-  } else {
-    res.status(401).json({ message: result.message });
-  }
+app.post("/refresh-token", (req, res) => {
+  refreshMyToken(req, res);
+});
+
+app.get("/tracks", (req, res) => {
+  track(req, res);
+});
+
+app.get("/my-tracks", authenticateJWT, (req, res) => {
+  myTrack(req, res);
 });
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
