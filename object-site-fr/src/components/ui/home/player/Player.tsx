@@ -5,7 +5,10 @@ import { observer } from "mobx-react-lite";
 
 export const Player = observer(() => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const currentTrack = playerStore.tracks[playerStore.trackIndex];
+  const currentTrack =
+    playerStore.tracks.length > 0
+      ? playerStore.tracks[playerStore.trackIndex]
+      : null;
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -33,9 +36,11 @@ export const Player = observer(() => {
 
   const handleEnded = () => {
     playerStore.nextTrack();
-    if (audioRef.current && playerStore.isPlaying) {
+    if (audioRef.current && playerStore.isPlaying && currentTrack) {
+      audioRef.current.src = currentTrack.url;
+      audioRef.current.load();
       audioRef.current.play().catch((e) => {
-        console.log("Ошибка воспроизведения:", e);
+        console.error("Ошибка воспроизведения:", e);
       });
     }
   };
@@ -112,6 +117,10 @@ export const Player = observer(() => {
     setIsDragging(false);
   };
 
+  if (!currentTrack) {
+    return <div>Загрузка...</div>;
+  }
+
   return (
     <>
       <audio ref={audioRef} src={currentTrack.url} onEnded={handleEnded} />
@@ -126,10 +135,22 @@ export const Player = observer(() => {
 
       <div className="progress-container">
         <div className="time-display__start">
-          {Math.floor(currentTime / 60)}:{Math.floor(currentTime % 60)}
+          {Math.floor(currentTime / 60)
+            .toString()
+            .padStart(2, "0")}
+          :
+          {Math.floor(currentTime % 60)
+            .toString()
+            .padStart(2, "0")}
         </div>
         <div className="time-display__end">
-          {Math.floor(duration / 60)}:{Math.floor(duration % 60)}
+          {Math.floor(duration / 60)
+            .toString()
+            .padStart(2, "0")}
+          :
+          {Math.floor(duration % 60)
+            .toString()
+            .padStart(2, "0")}
         </div>
         <div
           className="slider-wrapper"
@@ -140,7 +161,7 @@ export const Player = observer(() => {
           <input
             type="range"
             min={0}
-            max={duration}
+            max={Number.isFinite(duration) ? duration : 0}
             value={currentTime}
             onChange={handleProgressChange}
             onMouseDown={handleSeekMouseDown}
