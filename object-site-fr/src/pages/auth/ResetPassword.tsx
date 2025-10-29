@@ -23,6 +23,9 @@ export const ResetPassword = () => {
       <div className="signin__container">
         <div className="signin__card">
           <form className="form__signin" onSubmit={handleSubmit(submitSignIn)}>
+            <p className="form__title" onClick={() => navigate({ to: "/" })}>
+              Next track
+            </p>
             <Input
               {...register("email", { required: true })}
               placeholder="Login"
@@ -43,15 +46,15 @@ export const ResetPassword = () => {
               <Button htmlType="submit">Sign in</Button>
               <p
                 className="form__option"
-                onClick={() => navigate({ to: "/auth/signUp" })}
+                onClick={() => navigate({ to: "/auth/signIn" })}
               >
-                Sign Up
+                Sign In
               </p>
               <p
                 className="form__option"
-                onClick={() => navigate({ to: "/auth/resetPassword" })}
+                onClick={() => navigate({ to: "/auth/signUp" })}
               >
-                Reset password?
+                Sign Up
               </p>
             </div>
           </form>

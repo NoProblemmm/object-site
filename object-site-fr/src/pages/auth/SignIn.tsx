@@ -37,6 +37,9 @@ export const SignIn = () => {
       <div className="signin__container">
         <div className="signin__card">
           <form className="form__signin" onSubmit={handleSubmit(submitSignIn)}>
+            <p className="form__title" onClick={() => navigate({ to: "/" })}>
+              Next track
+            </p>
             <Input
               {...register("email", { required: true })}
               placeholder="Login"
