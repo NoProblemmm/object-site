@@ -8,7 +8,25 @@
 .signin__card {
   display: block;
   width: 30rem;
+  padding: 30px;
   height: auto;
+}
+.form__title {
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 1rem;
+  transition: all 0.5s;
+  padding: 3px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #202020;
+}
+
+.form__title:hover {
+  background-color: #61616100;
+  color: #616161;
+  transform: scale(1.1);
 }
 
 .form__signin {
@@ -42,6 +60,7 @@
 .form__option {
   margin-bottom: 1rem;
   cursor: pointer;
+  transition: all 0.5s;
 }
 .form__option:hover {
   color: #616161;
