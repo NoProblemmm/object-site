@@ -5,10 +5,18 @@
   height: 50rem;
   overflow-x: hidden;
 }
+
+.container-sider__draggable {
+  border-style: dotted;
+  border-width: 5px;
+  border-color: rgba(0, 122, 230, 0.5);
+  background-color: rgba(0, 78, 146, 0.082);
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
-.card__containerst {
+.card__container-sider {
   border-radius: 5px;
   margin-bottom: 3px;
   display: flex;
@@ -20,6 +28,11 @@
 }
 
 .card__title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: calc(100% - 120px);
+  transition: max-width 0.3s ease-in-out;
   padding: 0 5px 0 5px;
   width: 100%;
 }
@@ -41,6 +54,25 @@
 }
 
 .track__menu {
-  position: absolute;
-  opacity: 0;
+  border-radius: 15px;
+  padding: 10px;
+  transition: all 0.5s;
+  background-color: rgba(46, 46, 46, 0.979);
+}
+
+.track__menu:hover {
+  transform: scale(110%);
+}
+
+.track__menu > ul {
+  list-style: none;
+  cursor: pointer;
+}
+
+.card__image:hover {
+  transform: scale(110%);
+}
+
+.three__dots-img:hover {
+  transform: rotate(-90deg) scale(110%);
 }
