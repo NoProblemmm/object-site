@@ -13,6 +13,9 @@ export const Player = observer(() => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isValue, setIsValue] = useState(false);
+  const [isMute, setIsMute] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,10 +83,11 @@ export const Player = observer(() => {
     playerStore.changeVolume(newVolume);
   };
 
-  const [isDragging, setIsDragging] = useState(false);
-
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
+    if (playerStore.isPlaying) {
+      playerStore.togglePlayPause();
+    }
     const container = e.currentTarget;
     const rect = container.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -115,18 +119,56 @@ export const Player = observer(() => {
 
   const handleMouseUp = () => {
     setIsDragging(false);
+    if (!playerStore.isPlaying) {
+      playerStore.togglePlayPause();
+    }
   };
 
   if (!currentTrack) {
     return <div>Загрузка...</div>;
   }
 
+  const handleDragStart = (e: any) => {
+    const imageSrc = e.target.src || e.target.dataset.imageUrl;
+    const img = new Image();
+    img.src = imageSrc;
+
+    e.dataTransfer.setDragImage(
+      img,
+      img.naturalWidth / 2,
+      img.naturalHeight / 2
+    );
+    e.dataTransfer.setData("text/plain", JSON.stringify(currentTrack));
+    document.dispatchEvent(new CustomEvent("drag-start"));
+    e.dr;
+  };
+
+  const handleDragEnd = () => {
+    document.dispatchEvent(new CustomEvent("drag-end"));
+  };
+
   return (
     <>
-      <audio ref={audioRef} src={currentTrack.url} onEnded={handleEnded} />
+      <audio
+        ref={audioRef}
+        src={currentTrack.url}
+        onEnded={handleEnded}
+        muted={isMute}
+      />
 
-      <div className="cover__container">
-        <img src={currentTrack.image} alt="Cover Image" className="cover" />
+      <div className="cover__container ">
+        <div
+          className={`cover img__container ${playerStore.isPlaying ? "cover__multi" : "img__static"}`}
+        >
+          <img
+            src={currentTrack.image}
+            alt="Cover Image"
+            className="cover draggable "
+            draggable
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+          />
+        </div>
       </div>
       <div className="name__compose">
         <h3 className="title">{currentTrack.name}</h3>
@@ -197,12 +239,21 @@ export const Player = observer(() => {
       </div>
 
       <div className="volume-container">
+        <img
+          src={`/static/player/${isMute ? "muted.svg" : "volume.svg"}`}
+          className={`volume__image  ${isValue && "volume__image-isVolume "}`}
+          alt="sd"
+          onClick={() => setIsMute(!isMute)}
+        />
+
         <input
           type="range"
           min={0}
           max={100}
           value={playerStore.volume}
           onChange={handleVolumeChange}
+          onMouseDown={() => setIsValue(true)}
+          onMouseUp={() => setIsValue(false)}
           className="volume-slider"
         />
       </div>
