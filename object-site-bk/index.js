@@ -1,8 +1,14 @@
 import express from "express";
-import { login, myTrack, refreshMyToken, track } from "./src/path/path.js";
+import {
+  login,
+  myTrack,
+  refreshMyToken,
+  track,
+  addMyTrack,
+  deleteMyTrack,
+} from "./src/path/path.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { Track, UserTrack } from "./Data.js";
 import dotenv from "dotenv";
 import { authenticateJWT } from "./src/common/token/Token.js";
 dotenv.config();
@@ -24,6 +30,7 @@ app.use(
   express.static("media/imageTrack/")
 );
 
+// POST
 app.post("/login", (req, res) => {
   login(req, res);
 });
@@ -32,12 +39,22 @@ app.post("/refresh-token", (req, res) => {
   refreshMyToken(req, res);
 });
 
+app.post("/add-mytrack", authenticateJWT, (req, res) => {
+  addMyTrack(req, res);
+});
+
+// GET
 app.get("/tracks", (req, res) => {
   track(req, res);
 });
 
 app.get("/my-tracks", authenticateJWT, (req, res) => {
   myTrack(req, res);
+});
+
+// DELETE
+app.delete("/delete-mytrack", authenticateJWT, (req, res) => {
+  deleteMyTrack(req, res);
 });
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
