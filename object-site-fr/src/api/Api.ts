@@ -3,7 +3,7 @@ import { type ISignInRequest } from "./data-details";
 import { useApi } from "./hooks/useApi";
 
 export const Api = () => {
-  const { POST, GET } = useApi;
+  const { POST, GET, DELETE } = useApi;
 
   // Авторизация
   const signIn = async (data: ISignInRequest) => {
@@ -49,5 +49,34 @@ export const Api = () => {
       return {};
     }
   };
-  return { signIn, getTrack, getMyTrack, refreshToken };
+
+  // Добавление трека в избранное
+  const addMyTrack = async (trackId: number) => {
+    const token = useApiTokenProvider.accessToken;
+    const response = POST(
+      "add-mytrack",
+      { trackId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  };
+
+  // Удаление трека из избранных
+  const deleteMyTrack = (trackId: number) => {
+    const token = useApiTokenProvider.accessToken;
+    const response = DELETE(
+      "delete-mytrack",
+      { trackId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  };
+  return {
+    signIn,
+    getTrack,
+    getMyTrack,
+    refreshToken,
+    addMyTrack,
+    deleteMyTrack,
+  };
 };
