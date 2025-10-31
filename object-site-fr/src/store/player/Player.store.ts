@@ -26,6 +26,20 @@ export class PlayerStore implements IPlayerStates {
       this.myTracks = response as ITrack[];
     });
   };
+  public addMyTrack = async (trackId: number) => {
+    await Api()
+      .addMyTrack(trackId)
+      .then(async () => {
+        await this.getMyTrack();
+      });
+  };
+  public deleteMyTrack = async (trackId: number) => {
+    await Api()
+      .deleteMyTrack(trackId)
+      .then(async () => {
+        await this.getMyTrack();
+      });
+  };
 
   togglePlayPause() {
     this.isPlaying = !this.isPlaying;
