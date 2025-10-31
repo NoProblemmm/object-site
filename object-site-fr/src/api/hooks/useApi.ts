@@ -45,7 +45,8 @@ class ApiRequest {
   POST = (endpoint: string, body: any, { ...conf }) =>
     this.request("post", endpoint, body, { ...conf });
   PUT = (endpoint: string, body: any) => this.request("put", endpoint, body);
-  DELETE = (endpoint: string) => this.request("delete", endpoint);
+  DELETE = (endpoint: string, body: any, { ...conf }) =>
+    this.request("delete", endpoint, body, { ...conf });
 }
 
 export const useApi = new ApiRequest();
