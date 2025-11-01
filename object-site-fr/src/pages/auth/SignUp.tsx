@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import "./auth.css";
-import { signInFormValidation, type TSignInSchema } from "./validations";
+import { signUpFormValidation, type TSignUpSchema } from "./validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { Input } from "../../components/ui/input/Input";
@@ -11,7 +11,7 @@ export const SignUp = () => {
     register,
     control,
     formState: { errors },
-  } = useForm<TSignInSchema>({ resolver: zodResolver(signInFormValidation) });
+  } = useForm<TSignUpSchema>({ resolver: zodResolver(signUpFormValidation) });
 
   const navigate = useNavigate();
 
@@ -24,6 +24,10 @@ export const SignUp = () => {
             <p className="form__title" onClick={() => navigate({ to: "/" })}>
               Next track
             </p>
+            <Input
+              {...register("name", { required: true })}
+              placeholder="Login"
+            ></Input>
             <Input
               {...register("email", { required: true })}
               placeholder="Login"
