@@ -27,13 +27,27 @@
   background-color: rgba(41, 41, 41, 0.507);
 }
 
+.card__title-container {
+  width: 100%;
+  padding: 0 5px 0 5px;
+  max-width: calc(100% - 120px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: max-width 0.3s ease-in-out;
+}
+
+.card__author {
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+}
 .card__title {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: calc(100% - 120px);
   transition: max-width 0.3s ease-in-out;
-  padding: 0 5px 0 5px;
   width: 100%;
 }
 
@@ -75,4 +89,16 @@
 
 .three__dots-img:hover {
   transform: rotate(-90deg) scale(110%);
+}
+
+@media screen and (max-width: 1000px) {
+  .container-sider {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .container-sider {
+    display: block;
+  }
 }

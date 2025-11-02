@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
 import { playerStore } from "../../../store/player/Player.store";
-import type { ITrack } from "../../../store/player/Player.type";
+import { TrackList } from "../../ui/trackList/TrackList";
 import "./LeftSider.css";
 
 export const LeftSider = observer(() => {
@@ -19,10 +19,6 @@ export const LeftSider = observer(() => {
     return () => clearInterval(interval);
   }, []);
 
-  const handelMenuTrack = (id: number) => {
-    setTrackMenu(id === trackMenu ? undefined : id);
-  };
-
   document.addEventListener(
     "click",
     (event) => {
@@ -37,13 +33,6 @@ export const LeftSider = observer(() => {
     },
     false
   );
-
-  const handelSelectTrack = (item: ITrack) => {
-    const selectTrack = playerStore.tracks.findIndex(
-      (track) => track.id === item.id
-    );
-    playerStore.selectTrack(selectTrack);
-  };
 
   useEffect(() => {
     const handleDragStart = () => {
@@ -72,10 +61,6 @@ export const LeftSider = observer(() => {
     await playerStore.addMyTrack(track.id);
   };
 
-  const handelDeleteTrack = async (trackId: number) => {
-    await playerStore.deleteMyTrack(trackId);
-  };
-
   return (
     <>
       <div
@@ -88,33 +73,7 @@ export const LeftSider = observer(() => {
           src={playerStore.myTracks[playerStore.trackIndex]?.url}
         ></audio>
         {playerStore.myTracks.map((item) => (
-          <div key={item.id} className="card__container-sider">
-            <img
-              src={item.image}
-              alt="Track"
-              className="card__image"
-              onClick={() => handelSelectTrack(item)}
-            />
-            <span className="card__title">{item.name}</span>
-
-            {trackMenu === item.id ? (
-              <div className="track__menu">
-                <ul>
-                  <li onClick={() => handelDeleteTrack(item.id)}>Delete</li>
-                </ul>
-              </div>
-            ) : (
-              <p className="card__subtitle_time">{item.time}</p>
-            )}
-
-            <img
-              key={item.id}
-              onClick={() => handelMenuTrack(item.id)}
-              src="/static/player/three-dots.svg"
-              alt="Track"
-              className={`card__image ${trackMenu === item.id ? "three__dots-img" : ""}`}
-            />
-          </div>
+          <TrackList item={item} />
         ))}
       </div>
     </>
