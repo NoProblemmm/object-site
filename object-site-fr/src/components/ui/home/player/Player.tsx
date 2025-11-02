@@ -159,14 +159,14 @@ export const Player = observer(() => {
       <div className="cover__container ">
         <div
           className={`cover img__container ${playerStore.isPlaying ? "cover__multi" : "img__static"}`}
+          draggable
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
         >
           <img
             src={currentTrack.image}
             alt="Cover Image"
             className="cover draggable "
-            draggable
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
           />
         </div>
       </div>
