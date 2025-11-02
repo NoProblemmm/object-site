@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { emailValidation, passwordValidation } from "../../common/validation";
+import {
+  emailValidation,
+  passwordValidation,
+  nameValidation,
+} from "../../common/validation";
 
 export const signInFormValidation = z.object({
   email: emailValidation,
@@ -8,7 +12,8 @@ export const signInFormValidation = z.object({
 
 export const signUpFormValidation = z
   .object({
-    login: emailValidation,
+    name: nameValidation,
+    email: emailValidation,
     password: passwordValidation,
     confirmPassword: passwordValidation,
   })
