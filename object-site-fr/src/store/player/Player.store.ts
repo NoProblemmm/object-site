@@ -3,6 +3,7 @@ import { type IPlayerStates, type ITrack } from "./Player.type";
 import { Api } from "../../api/Api";
 
 export class PlayerStore implements IPlayerStates {
+  submenu = "NextTrack";
   isPlaying = false;
   volume = 50;
   trackIndex = 0;
@@ -71,6 +72,10 @@ export class PlayerStore implements IPlayerStates {
   seekTo(time: any) {
     console.log("Перемотка на:", time);
   }
+
+  public menuPage = (page: string) => {
+    this.submenu = page;
+  };
 }
 
 export const playerStore = new PlayerStore();
