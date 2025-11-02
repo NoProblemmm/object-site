@@ -3,21 +3,29 @@ import { playerStore } from "../../../../../store/player/Player.store";
 
 export const PlayerLogic = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const currentTrack = playerStore.tracks[playerStore.trackIndex];
+  const currentTrack =
+    playerStore.tracks.length > 0
+      ? playerStore.tracks[playerStore.trackIndex]
+      : null;
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isValue, setIsValue] = useState(false);
+  const [isMute, setIsMute] = useState(false);
 
-  const setTime = () => {
-    if (audioRef.current && !isSeeking) {
-      setCurrentTime(audioRef.current.currentTime);
-      setDuration(audioRef.current.duration);
-    }
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (audioRef.current && !isSeeking) {
+        setCurrentTime(audioRef.current.currentTime);
+        setDuration(audioRef.current.duration);
+      }
+    }, 500);
+    return () => clearInterval(interval);
+  }, [isSeeking, playerStore.trackIndex]);
 
-  const loadTrack = () => {
+  useEffect(() => {
     if (audioRef.current) {
       if (playerStore.isPlaying) {
         audioRef.current.play();
@@ -25,13 +33,15 @@ export const PlayerLogic = () => {
         audioRef.current.pause();
       }
     }
-  };
+  }, [playerStore.isPlaying, playerStore.trackIndex]);
 
   const handleEnded = () => {
     playerStore.nextTrack();
-    if (audioRef.current && playerStore.isPlaying) {
+    if (audioRef.current && playerStore.isPlaying && currentTrack) {
+      audioRef.current.src = currentTrack.url;
+      audioRef.current.load();
       audioRef.current.play().catch((e) => {
-        console.log("Ошибка воспроизведения:", e);
+        console.error("Ошибка воспроизведения:", e);
       });
     }
   };
@@ -73,6 +83,9 @@ export const PlayerLogic = () => {
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
+    if (playerStore.isPlaying) {
+      playerStore.togglePlayPause();
+    }
     const container = e.currentTarget;
     const rect = container.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -104,6 +117,28 @@ export const PlayerLogic = () => {
 
   const handleMouseUp = () => {
     setIsDragging(false);
+    if (!playerStore.isPlaying) {
+      playerStore.togglePlayPause();
+    }
+  };
+
+  const handleDragStart = (e: any) => {
+    const imageSrc = e.target.src || e.target.dataset.imageUrl;
+    const img = new Image();
+    img.src = imageSrc;
+
+    e.dataTransfer.setDragImage(
+      img,
+      img.naturalWidth / 2,
+      img.naturalHeight / 2
+    );
+    e.dataTransfer.setData("text/plain", JSON.stringify(currentTrack));
+    document.dispatchEvent(new CustomEvent("drag-start"));
+    e.dr;
+  };
+
+  const handleDragEnd = () => {
+    document.dispatchEvent(new CustomEvent("drag-end"));
   };
 
   return {
@@ -112,10 +147,14 @@ export const PlayerLogic = () => {
     currentTrack,
     duration,
     playerStore,
-    setTime,
-    loadTrack,
+    isMute,
+    isValue,
     handleMouseDown,
+    handleDragStart,
+    handleDragEnd,
     handleEnded,
+    setIsValue,
+    setIsMute,
     handleMouseMove,
     handleMouseUp,
     handleProgressChange,
