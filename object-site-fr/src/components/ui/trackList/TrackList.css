@@ -1,0 +1,74 @@
+.card__container-sider {
+  border-radius: 5px;
+  margin-bottom: 3px;
+  display: flex;
+  padding: 4px;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  background-color: rgba(41, 41, 41, 0.507);
+}
+
+.card__title-container {
+  width: 100%;
+  padding: 0 5px 0 5px;
+  max-width: calc(100% - 120px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: max-width 0.3s ease-in-out;
+}
+
+.card__author {
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+}
+.card__title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: calc(100% - 120px);
+  transition: max-width 0.3s ease-in-out;
+  width: 100%;
+}
+
+.card__subtitle_time {
+  padding-right: 5px;
+}
+
+.three__dots-img {
+  transform: rotate(-90deg);
+  transition: all 0.5s;
+}
+
+.card__image {
+  width: 50px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.5s;
+}
+
+.track__menu {
+  border-radius: 15px;
+  padding: 10px;
+  transition: all 0.5s;
+  background-color: rgba(46, 46, 46, 0.979);
+}
+
+.track__menu:hover {
+  transform: scale(110%);
+}
+
+.track__menu > ul {
+  list-style: none;
+  cursor: pointer;
+}
+
+.card__image:hover {
+  transform: scale(110%);
+}
+
+.three__dots-img:hover {
+  transform: rotate(-90deg) scale(110%);
+}
