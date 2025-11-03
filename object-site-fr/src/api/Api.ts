@@ -1,5 +1,5 @@
 import { useApiTokenProvider } from "./ApiToken.provider";
-import { type ISignInRequest } from "./data-details";
+import { type ISignInRequest, type ISignUpRequest } from "./data-details";
 import { useApi } from "./hooks/useApi";
 
 export const Api = () => {
@@ -8,8 +8,22 @@ export const Api = () => {
   // Авторизация
   const signIn = async (data: ISignInRequest) => {
     const response = await POST(
-      "login",
+      "signIn",
       {
+        email: data.email,
+        password: data.password,
+      },
+      {}
+    );
+    return response;
+  };
+
+  // Регистрация
+  const signUp = async (data: ISignUpRequest) => {
+    const response = await POST(
+      "signUp",
+      {
+        name: data.name,
         email: data.email,
         password: data.password,
       },
@@ -73,6 +87,7 @@ export const Api = () => {
   };
   return {
     signIn,
+    signUp,
     getTrack,
     getMyTrack,
     refreshToken,
