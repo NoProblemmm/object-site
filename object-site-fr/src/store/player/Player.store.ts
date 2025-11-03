@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { type IPlayerStates, type ITrack } from "./Player.type";
-import { Api } from "../../api/Api";
+import { Api } from "@api/Api";
 
 export class PlayerStore implements IPlayerStates {
   submenu = "NextTrack";

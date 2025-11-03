@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
-import "./auth.css";
-import { signUpFormValidation, type TSignUpSchema } from "./validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import { Input } from "../../components/ui/input/Input";
-import { Button } from "../../components/ui/button/Button";
-export const SignUp = () => {
+import { Input } from "@components/ui/input/Input";
+import { Button } from "@components/ui/button/Button";
+import { signUpFormValidation, type TSignUpSchema } from "./validations";
+import { Api } from "@api/Api";
+import "./auth.css";
+import type { ISignUpRequest } from "@api/data-details";
+
+export const SignUp: React.FC = () => {
   const {
     handleSubmit,
     register,
@@ -15,7 +18,12 @@ export const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const submitSignIn = () => {};
+  const submitSignIn = async (data: ISignUpRequest) => {
+    const response = await Api().signUp(data);
+    if (response.success) {
+      navigate({ to: "/auth/signIn" });
+    }
+  };
   return (
     <>
       <div className="signin__container">
@@ -26,11 +34,11 @@ export const SignUp = () => {
             </p>
             <Input
               {...register("name", { required: true })}
-              placeholder="Login"
+              placeholder="Name"
             ></Input>
             <Input
               {...register("email", { required: true })}
-              placeholder="Login"
+              placeholder="E-mail"
             ></Input>
             {errors.email && (
               <p className="form__error">{errors.email.message}</p>
@@ -40,12 +48,20 @@ export const SignUp = () => {
               type="password"
               placeholder="Password"
             ></Input.Password>
-
             {errors.password && (
               <p className="form__error">{errors.password.message}</p>
             )}
+            <Input.Password
+              {...register("confirmPassword", { required: true })}
+              type="password"
+              placeholder="Confirm Password"
+            ></Input.Password>
+            {errors.confirmPassword && (
+              <p className="form__error">{errors.confirmPassword.message}</p>
+            )}
+
             <div className="form__button">
-              <Button htmlType="submit">Sign in</Button>
+              <Button htmlType="submit">Sign Up</Button>
               <p
                 className="form__option"
                 onClick={() => navigate({ to: "/auth/signIn" })}

@@ -3,7 +3,7 @@ import {
   emailValidation,
   passwordValidation,
   nameValidation,
-} from "../../common/validation";
+} from "@common/validation";
 
 export const signInFormValidation = z.object({
   email: emailValidation,

@@ -1,15 +1,16 @@
-import { Layout } from "../../components/home/playerLayout/layout/Layout";
-import { Footer } from "../../components/ui/footer/Footer";
-import { Header } from "../../components/ui/header/Head";
-import { LeftSider } from "../../components/home/leftSider/LeftSider";
-import { RightSider } from "../../components/home/rightSider/RightSider";
-import "./Home.css";
 import { useEffect } from "react";
-import { playerStore } from "../../store/player/Player.store";
-import { useSessionStore } from "../../store/session/Session.store";
 import { observer } from "mobx-react-lite";
-import { useApiTokenProvider } from "../../api/ApiToken.provider";
-export const Home = observer(() => {
+import { Layout } from "@components/home/playerLayout/layout/Layout";
+import { Footer } from "@components/ui/footer/Footer";
+import { Header } from "@components/ui/header/Head";
+import { LeftSider } from "@components/home/leftSider/LeftSider";
+import { RightSider } from "@components/home/rightSider/RightSider";
+import { playerStore } from "@store/player/Player.store";
+import { useSessionStore } from "@store/session/Session.store";
+import { useApiTokenProvider } from "@api/ApiToken.provider";
+import "./Home.css";
+
+export const Home: React.FC = observer(() => {
   const links = [
     { name: "Welcome", link: "/welcome" },
     {
@@ -25,13 +26,10 @@ export const Home = observer(() => {
       useSessionStore.refreshSession().then(() => {
         if (playerStore.tracks.length === 0) playerStore.getTrackStore();
         if (playerStore.myTracks.length === 0) playerStore.getMyTrack();
-        console.log(useSessionStore.isAutentificate);
       });
     } else {
       if (playerStore.tracks.length === 0) playerStore.getTrackStore();
       if (playerStore.myTracks.length === 0) playerStore.getMyTrack();
-
-      console.log(useSessionStore.isAutentificate);
     }
   }, []);
   return (
