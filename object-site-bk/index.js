@@ -1,6 +1,7 @@
 import express from "express";
 import {
-  login,
+  signIn,
+  signUp,
   myTrack,
   refreshMyToken,
   track,
@@ -14,6 +15,7 @@ import { authenticateJWT } from "./src/common/token/Token.js";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
+
 app.use(
   cors({
     origin: `http://localhost:5173`,
@@ -21,7 +23,6 @@ app.use(
     credentials: true,
   })
 );
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -31,8 +32,12 @@ app.use(
 );
 
 // POST
-app.post("/login", (req, res) => {
-  login(req, res);
+app.post("/signIn", (req, res) => {
+  signIn(req, res);
+});
+
+app.post("/signUp", (req, res) => {
+  signUp(req, res);
 });
 
 app.post("/refresh-token", (req, res) => {
