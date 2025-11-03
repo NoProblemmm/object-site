@@ -1,6 +1,6 @@
 import "./Layout.css";
 
-export const Layout = () => {
+export const Layout: React.FC = () => {
   return (
     <div className="content">
       <div className="container">

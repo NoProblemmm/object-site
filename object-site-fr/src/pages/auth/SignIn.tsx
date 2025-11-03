@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
-import { Button } from "../../components/ui/button/Button";
-import { Input } from "../../components/ui/input/Input";
-import { signInFormValidation, type TSignInSchema } from "./validations";
+import { Button } from "@components/ui/button/Button";
+import { Input } from "@components/ui/input/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import "./auth.css";
 import { useNavigate } from "@tanstack/react-router";
-import { useSessionStore } from "../../store/session/Session.store";
-import type { ISignInRequest } from "../../api/data-details";
+import { useSessionStore } from "@store/session/Session.store";
+import { signInFormValidation, type TSignInSchema } from "./validations";
+import type { ISignInRequest } from "@api/data-details";
+import "./auth.css";
 
-export const SignIn = () => {
+export const SignIn: React.FC = () => {
   const {
     handleSubmit,
     register,
@@ -42,7 +42,7 @@ export const SignIn = () => {
             </p>
             <Input
               {...register("email", { required: true })}
-              placeholder="Login"
+              placeholder="E-mail"
             ></Input>
             {errors.email && (
               <p className="form__error">{errors.email.message}</p>

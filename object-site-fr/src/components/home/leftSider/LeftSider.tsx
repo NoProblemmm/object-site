@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
-import { playerStore } from "../../../store/player/Player.store";
-import { TrackList } from "../../ui/trackList/TrackList";
+import { playerStore } from "@store/player/Player.store";
+import { TrackList } from "@components/ui/trackList/TrackList";
 import "./LeftSider.css";
 
-export const LeftSider = observer(() => {
+export const LeftSider: React.FC = observer(() => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [duration, setDuration] = useState(0);
   const [trackMenu, setTrackMenu] = useState<number | undefined>();

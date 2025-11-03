@@ -1,5 +1,5 @@
-import { playerStore } from "../../../../store/player/Player.store";
-import { TrackList } from "../../trackList/TrackList";
+import { playerStore } from "@store/player/Player.store";
+import { TrackList } from "@components/ui/trackList/TrackList";
 import "./MyTrackMenu.css";
 export const MyTrackMenu = () => {
   return (

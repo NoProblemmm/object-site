@@ -1,4 +1,4 @@
-import { playerStore } from "../../../../store/player/Player.store";
+import { playerStore } from "@store/player/Player.store";
 import "./TabMenu.css";
 
 export const TabMenu = () => {

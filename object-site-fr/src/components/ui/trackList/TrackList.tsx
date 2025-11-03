@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { playerStore } from "../../../store/player/Player.store";
-import type { ITrack } from "../../../store/player/Player.type";
+import { playerStore } from "@store/player/Player.store";
+import type { ITrack } from "@store/player/Player.type";
 import "./TrackList.css";
 
 type TProps = {

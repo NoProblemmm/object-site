@@ -2,7 +2,6 @@ import { LoadingStyles } from "./scripts/LoadingStyles";
 import { useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import "./Head.css";
-import { observer } from "mobx-react-lite";
 
 interface ILink {
   name: string;

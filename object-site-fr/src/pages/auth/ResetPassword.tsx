@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import "./auth.css";
-import { signInFormValidation, type TSignInSchema } from "./validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
-import { Input } from "../../components/ui/input/Input";
-import { Button } from "../../components/ui/button/Button";
+import { Input } from "@components/ui/input/Input";
+import { Button } from "@components/ui/button/Button";
+import { signInFormValidation, type TSignInSchema } from "./validations";
+import "./auth.css";
 
-export const ResetPassword = () => {
+export const ResetPassword: React.FC = () => {
   const {
     handleSubmit,
     register,
@@ -28,7 +28,7 @@ export const ResetPassword = () => {
             </p>
             <Input
               {...register("email", { required: true })}
-              placeholder="Login"
+              placeholder="E-mail"
             ></Input>
             {errors.email && (
               <p className="form__error">{errors.email.message}</p>

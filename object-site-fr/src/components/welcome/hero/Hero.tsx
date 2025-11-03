@@ -1,5 +1,5 @@
 import "./Hero.css";
-export const Hero = () => {
+export const Hero: React.FC = () => {
   return (
     <>
       <header className="hero-container">
