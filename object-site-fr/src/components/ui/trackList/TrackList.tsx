@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { playerStore } from "@store/player/Player.store";
 import type { ITrack } from "@store/player/Player.type";
@@ -6,7 +7,7 @@ import "./TrackList.css";
 type TProps = {
   item: ITrack;
 };
-export const TrackList = ({ item }: TProps) => {
+export const TrackList = React.memo(({ item }: TProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [duration, setDuration] = useState(0);
   const [trackMenu, setTrackMenu] = useState<number | undefined>();
@@ -81,4 +82,4 @@ export const TrackList = ({ item }: TProps) => {
       />
     </div>
   );
-};
+});

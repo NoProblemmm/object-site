@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
+import { Api } from "@api/Api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { Input } from "@components/ui/input/Input";
 import { Button } from "@components/ui/button/Button";
 import { signUpFormValidation, type TSignUpSchema } from "./validations";
-import { Api } from "@api/Api";
-import "./auth.css";
 import type { ISignUpRequest } from "@api/data-details";
+import "./auth.css";
 
 export const SignUp: React.FC = () => {
   const {
