@@ -22,7 +22,7 @@ export const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer")) {
-    return res.status(401).json({ message: "Неавторизированный доступ" });
+    return res.status(401).json({ message: "Unauthorized access" });
   }
 
   const token = authHeader.split(" ")[1];
@@ -32,9 +32,9 @@ export const authenticateJWT = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
-    console.error("Ошибка при проверке токена:", err);
+    console.error("Error verifying the token:", err);
     return res
       .status(403)
-      .json({ message: "Недоступно. Токен устарел или недействителен." });
+      .json({ message: "Not available. The token is outdated or invalid." });
   }
 };

@@ -19,11 +19,11 @@ export const signIn = async (req, res) => {
         refreshToken: result.refreshToken,
       });
     } else {
-      res.status(401).json({ error: result.message || "Неверные данные!" });
+      res.status(401).json({ error: result.message || "Incorrect data!" });
     }
     return res;
   } catch {
-    res.status(500).json({ error: "Ошибка авторизации" });
+    res.status(500).json({ error: "Authorization error" });
   }
 };
 
@@ -45,7 +45,7 @@ export const signUp = async (req, res) => {
       res.json({ success: false, message: "Problem signup user..." });
     }
   } catch {
-    res.status(500).json({ error: "Ошибка регистрации" });
+    res.status(500).json({ error: "Registration error" });
   }
 };
 
@@ -54,7 +54,7 @@ export const refreshMyToken = (req, res) => {
   const refreshToken = req.body.refreshToken;
 
   if (!refreshToken) {
-    return res.status(400).json({ message: "Требуется refresh-токен" });
+    return res.status(400).json({ message: "A refresh token is required" });
   }
   try {
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
@@ -70,9 +70,7 @@ export const refreshMyToken = (req, res) => {
       return res.json({ accessToken: newAccessToken });
     }
   } catch (err) {
-    res
-      .status(401)
-      .json({ message: "Некорректный или устаревший refresh-токен" });
+    res.status(401).json({ message: "Incorrect or outdated refresh token" });
   }
   return res;
 };
@@ -90,7 +88,7 @@ export const track = (req, res) => {
 
     return res.json(tracks);
   } catch {
-    res.status(401).json({ message: "Ошибка получения треков" });
+    res.status(401).json({ message: "Error receiving tracks" });
   }
 };
 
@@ -108,7 +106,7 @@ export const myTrack = (req, res) => {
       .filter(Boolean);
     res.json(tracksForUser);
   } catch {
-    res.status(401).json({ message: "Ошибка получения сохраненных треков" });
+    res.status(401).json({ message: "Error receiving saved tracks" });
   }
 };
 
@@ -125,16 +123,16 @@ export const addMyTrack = (req, res) => {
     if (existingEntry) {
       return res
         .status(400)
-        .json({ message: "Этот трек уже добавлен в избранное." });
+        .json({ message: "This track has already been added to favorites." });
     }
 
     UserTrack.push({ idUser: userId, idTrack: trackId });
 
     return res
       .status(201)
-      .json({ message: "Трек успешно добавлен в избранное." });
+      .json({ message: "The track was successfully added to favorites." });
   } catch {
-    res.status(401).json({ message: "Ошибка добавления треков" });
+    res.status(401).json({ message: "Error adding tracks" });
   }
 };
 
@@ -153,11 +151,15 @@ export const deleteMyTrack = (req, res) => {
 
       return res
         .status(200)
-        .json({ message: "Трек успешно удалён из избранного." });
+        .json({
+          message: "The track was successfully deleted from favorites.",
+        });
     } else {
-      return res.status(404).json({ message: "Трек не найден в избранном." });
+      return res
+        .status(404)
+        .json({ message: "The track was not found in favorites." });
     }
   } catch {
-    res.status(401).json({ message: "Ошибка удаления треков" });
+    res.status(401).json({ message: "Track deletion error" });
   }
 };
