@@ -73,7 +73,7 @@ export const LeftSider: React.FC = observer(() => {
           src={playerStore.myTracks[playerStore.trackIndex]?.url}
         ></audio>
         {playerStore.myTracks.map((item) => (
-          <TrackList item={item} />
+          <TrackList key={item.id} item={item} />
         ))}
       </div>
     </>
