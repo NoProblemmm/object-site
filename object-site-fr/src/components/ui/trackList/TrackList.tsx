@@ -41,11 +41,11 @@ export const TrackList = React.memo(({ item }: TProps) => {
   );
 
   const handelSelectTrack = (item: ITrack) => {
-    const selectTrack = playerStore.tracks.findIndex(
+    const selectTrack = playerStore.myTracks.findIndex(
       (track) => track.id === item.id
     );
-    playerStore.selectTrack(selectTrack);
-    playerStore.menuPage("NextTrack");
+    playerStore.playMyTrack(selectTrack);
+    playerStore.menuPage("Player");
   };
   const handelDeleteTrack = async (trackId: number) => {
     await playerStore.deleteMyTrack(trackId);
