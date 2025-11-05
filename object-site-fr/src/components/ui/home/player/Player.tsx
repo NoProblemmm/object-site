@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { PlayerLogic } from "./hooks/PlayerLogic";
 import "./Player.css";
+import { PlayerMenu } from "./playerMenu/PlayerMenu";
 
 export const Player = observer(() => {
   const {
@@ -93,32 +94,7 @@ export const Player = observer(() => {
           />
         </div>
       </div>
-      <div className="menu__container">
-        <img
-          src="/static/player/player-seek.svg"
-          alt="Image Left"
-          className="control left-control"
-          onClick={() => playerStore.previousTrack()}
-        />
-        <img
-          src={
-            playerStore.isPlaying
-              ? "/static/player/pause.svg"
-              : "/static/player/play.svg"
-          }
-          alt="Image Left"
-          className="control"
-          onClick={() => playerStore.togglePlayPause()}
-        />
-
-        <img
-          src="/static/player/player-seek.svg"
-          alt="Image Right"
-          className="control right-control"
-          onClick={() => playerStore.nextTrack()}
-        />
-      </div>
-
+      <PlayerMenu />
       <div className="volume-container">
         <img
           src={`/static/player/${isMute ? "muted.svg" : "volume.svg"}`}

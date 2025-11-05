@@ -1,35 +1,5 @@
-.control {
-  width: 50px;
-  cursor: pointer;
-  filter: invert(23%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
-  transition: all 0.3s;
-}
-
 .draggable {
   cursor: grab;
-}
-
-.control:hover {
-  transform: scale(110%);
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
-}
-
-.left-control {
-  transform: rotate(-180deg);
-}
-
-.left-control:hover {
-  transform: rotate(-180deg) scale(110%);
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
-}
-
-.right-control:hover {
-  transform: scale(110%);
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
 }
 
 .title,
@@ -159,15 +129,6 @@
   margin-bottom: 1rem;
 }
 
-.menu__container {
-  flex: 1;
-  padding: 0 50px 0 50px;
-  margin-bottom: 2.8rem;
-  height: 90px;
-  display: flex;
-  justify-content: space-between;
-}
-
 .progress-container {
   display: block;
   align-items: center;
@@ -219,7 +180,7 @@
   padding: 20px 0;
   display: flex;
   align-items: center;
-  height: 0.1%;
+  height: 0.1px;
   gap: 10px;
   padding: 0 30px 0 30px;
 }
