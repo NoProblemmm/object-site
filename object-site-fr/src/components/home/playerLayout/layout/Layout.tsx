@@ -10,7 +10,7 @@ import "./Layout.css";
 export const Layout: React.FC = observer(() => {
   const handleResize = () => {
     if (window.innerWidth > 1000) {
-      playerStore.menuPage("NextTrack");
+      playerStore.menuPage("Player");
     }
   };
   useEffect(() => {
@@ -21,7 +21,7 @@ export const Layout: React.FC = observer(() => {
       <div className="container">
         {useSessionStore.isAutentificate && <TabMenu />}
         {playerStore.submenu === "MyTrack" && <MyTrackMenu />}
-        {playerStore.submenu === "NextTrack" && (
+        {playerStore.submenu === "Player" && (
           <div className="card__container">
             <Player />
           </div>
