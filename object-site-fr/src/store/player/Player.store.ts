@@ -3,10 +3,12 @@ import { type IPlayerStates, type ITrack } from "./Player.type";
 import { Api } from "@api/Api";
 
 export class PlayerStore implements IPlayerStates {
-  submenu = "NextTrack";
+  submenu = "Player";
   isPlaying = false;
+  isMyTrack = false;
   volume = 50;
   trackIndex = 0;
+  myTrackIndex = 0;
   tracks: ITrack[] = [];
   myTracks: ITrack[] = [];
 
@@ -42,6 +44,30 @@ export class PlayerStore implements IPlayerStates {
       });
   };
 
+  public menuPage = (page: string) => {
+    this.submenu = page;
+  };
+
+  public selectTrack(index: number) {
+    if (this.isMyTrack) {
+      this.myTrackIndex = index;
+      this.isPlaying = true;
+    } else {
+      this.trackIndex = index;
+      this.isPlaying = true;
+    }
+  }
+
+  public playTrack = (index: number) => {
+    this.isMyTrack = false;
+    this.selectTrack(index);
+  };
+
+  public playMyTrack = (index: number) => {
+    this.isMyTrack = true;
+    this.selectTrack(index);
+  };
+
   togglePlayPause() {
     this.isPlaying = !this.isPlaying;
   }
@@ -50,19 +76,27 @@ export class PlayerStore implements IPlayerStates {
     this.volume = newVolume;
   }
 
-  public selectTrack(index: number) {
-    this.trackIndex = index;
-    this.isPlaying = true;
-  }
-
   nextTrack() {
-    this.trackIndex++;
-    if (this.trackIndex >= this.tracks.length) {
-      this.trackIndex = 0;
+    if (this.isMyTrack) {
+      this.myTrackIndex++;
+      if (this.myTrackIndex >= this.myTracks.length) {
+        this.myTrackIndex = 0;
+      }
+    } else {
+      this.trackIndex++;
+      if (this.trackIndex >= this.tracks.length) {
+        this.trackIndex = 0;
+      }
     }
   }
 
   previousTrack() {
+    if (this.isMyTrack) {
+      this.myTrackIndex--;
+      if (this.myTrackIndex < 0) {
+        this.myTrackIndex = this.myTracks.length - 1;
+      }
+    }
     this.trackIndex--;
     if (this.trackIndex < 0) {
       this.trackIndex = this.tracks.length - 1;
@@ -72,10 +106,6 @@ export class PlayerStore implements IPlayerStates {
   seekTo(time: any) {
     console.log("Перемотка на:", time);
   }
-
-  public menuPage = (page: string) => {
-    this.submenu = page;
-  };
 }
 
 export const playerStore = new PlayerStore();

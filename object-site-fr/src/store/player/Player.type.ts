@@ -11,12 +11,22 @@ export interface ITrack {
 
 export interface IPlayerState {
   isPlaying: boolean;
+  isMyTrack: boolean;
   volume: number;
   trackIndex: number;
   tracks: ITrack[];
+  myTracks: ITrack[];
 }
 
 export interface IPlayerMethods {
+  getTrackStore(): void;
+  getMyTrack(): void;
+  addMyTrack(volume: number): void;
+  deleteMyTrack(volume: number): void;
+  selectTrack(volume: number): void;
+  menuPage(volume: string): void;
+  playTrack(volume: number): void;
+  playMyTrack(volume: number): void;
   togglePlayPause(): void;
   changeVolume(volume: number): void;
   nextTrack(): void;
