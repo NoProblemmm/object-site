@@ -14,7 +14,7 @@
   list-style-type: none;
 }
 
-.tabmenu__menu > li {
+.tabmenu__menu-items {
   flex: 1;
   border-style: solid;
   border-width: 0 0 1px 0;
@@ -40,4 +40,58 @@
   .tabmenu__container {
     display: none;
   }
+}
+
+.item__wind {
+  cursor: pointer;
+  flex: 1;
+  --angle: 0deg;
+  border-bottom: 0.1px solid;
+
+  padding: 15px;
+  background-color: rgba(31, 31, 31, 0.021);
+
+  border-image: conic-gradient(
+      from var(--angle),
+      rgb(0, 75, 56),
+      rgb(0, 143, 95),
+      rgb(0, 173, 58),
+      rgb(0, 45, 112),
+      rgb(58, 0, 92),
+      rgb(0, 81, 95),
+      rgb(63, 0, 105)
+    )
+    1;
+
+  animation: 10s rotate linear infinite;
+}
+.item__wind:hover {
+  padding-bottom: 14px;
+  border-bottom: 2px solid;
+  --angle: 0deg;
+  border-image: conic-gradient(
+      from var(--angle),
+      rgb(0, 75, 56),
+      rgb(0, 143, 95),
+      rgb(0, 173, 58),
+      rgb(0, 45, 112),
+      rgb(58, 0, 92),
+      rgb(0, 81, 95),
+      rgb(63, 0, 105)
+    )
+    1;
+
+  animation: 10s rotate linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
