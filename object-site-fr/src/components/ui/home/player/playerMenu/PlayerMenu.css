@@ -1,0 +1,45 @@
+.menu__container {
+  padding: 0 50px 0 50px;
+  margin-bottom: 2.8rem;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+}
+.control {
+  width: 50px;
+  cursor: pointer;
+  filter: invert(23%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
+    contrast(95%);
+  transition: all 0.3s;
+}
+
+.control:hover {
+  transform: scale(110%);
+  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
+    contrast(95%);
+}
+
+.add__item {
+  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
+    contrast(95%);
+}
+
+.left-control {
+  transform: rotate(-180deg);
+}
+
+.left-control:hover {
+  transform: rotate(-180deg) scale(110%);
+  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
+    contrast(95%);
+}
+.mix__item {
+  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
+    contrast(95%);
+}
+
+.right-control:hover {
+  transform: scale(110%);
+  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
+    contrast(95%);
+}
