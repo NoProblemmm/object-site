@@ -3,8 +3,11 @@ import { playerStore } from "@store/player/Player.store";
 
 export const PlayerLogic = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const currentTrack =
-    playerStore.tracks.length > 0
+  const currentTrack = playerStore.isMyTrack
+    ? playerStore.myTracks.length > 0
+      ? playerStore.myTracks[playerStore.myTrackIndex]
+      : null
+    : playerStore.tracks.length > 0
       ? playerStore.tracks[playerStore.trackIndex]
       : null;
 
@@ -23,7 +26,7 @@ export const PlayerLogic = () => {
       }
     }, 500);
     return () => clearInterval(interval);
-  }, [isSeeking, playerStore.trackIndex]);
+  }, [isSeeking, playerStore.trackIndex, playerStore.myTrackIndex]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -33,7 +36,7 @@ export const PlayerLogic = () => {
         audioRef.current.pause();
       }
     }
-  }, [playerStore.isPlaying, playerStore.trackIndex]);
+  }, [playerStore.isPlaying, playerStore.trackIndex, playerStore.myTrackIndex]);
 
   const handleEnded = () => {
     playerStore.nextTrack();
