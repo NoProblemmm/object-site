@@ -8,6 +8,8 @@ type TSessinState = {
 };
 
 type TSessionMethods = {
+  refreshSession(): void;
+
   signInStore(params: ISignInRequest): Promise<void>;
   isLogout(): void;
   clear(): void;

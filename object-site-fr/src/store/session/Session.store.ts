@@ -4,6 +4,7 @@ import { Api } from "@api/Api";
 import type { TSessionStore } from "./Session.type";
 import type { ISignInRequest, ISignInResponse } from "@api/data-details";
 import { ApiTokenProvider, useApiTokenProvider } from "@api/ApiToken.provider";
+import { useProfileStore } from "@store/profile/Profile.store";
 
 class SessionStore implements TSessionStore {
   public dataHolder = new DataHolder<string | null>(null);
@@ -22,7 +23,10 @@ class SessionStore implements TSessionStore {
 
   public refreshSession = async () => {
     try {
-      await useApiTokenProvider.refreshAccessToken();
+      await useApiTokenProvider.refreshAccessToken().then(() => {
+        useProfileStore.getProfile();
+      });
+
       this.dataHolder.setData(useApiTokenProvider.accessToken);
       return this._tokenProvider.accessToken;
     } catch (e) {
@@ -41,6 +45,7 @@ class SessionStore implements TSessionStore {
 
   public clear = () => {
     this.dataHolder.clear();
+    useProfileStore.clear();
     localStorage.removeItem("refresh_token");
   };
   public isLogout = () => {
