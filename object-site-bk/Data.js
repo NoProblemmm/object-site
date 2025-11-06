@@ -5,8 +5,9 @@ export const User = [
   {
     id: 1,
     name: "Artur",
+    image: `${process.env.BASE_URL}/media/user-1.jpg`,
     email: "test1@mail.ru",
-    password: "Test123!",
+    password: "$2b$10$TSkMKtGPCGlcfKydMAYf9uYNL8EbKQVea4GMC7e0JdEJT9V1p7r7O",
   },
 ];
 
