@@ -1,7 +1,8 @@
 import { playerStore } from "@store/player/Player.store";
 import { TrackList } from "@components/ui/trackList/TrackList";
 import "./MyTrackMenu.css";
-export const MyTrackMenu = () => {
+import { observer } from "mobx-react-lite";
+export const MyTrackMenu = observer(() => {
   return (
     <div className="myTrackMenu__container">
       {playerStore.myTracks.map((item) => (
@@ -9,4 +10,4 @@ export const MyTrackMenu = () => {
       ))}
     </div>
   );
-};
+});
