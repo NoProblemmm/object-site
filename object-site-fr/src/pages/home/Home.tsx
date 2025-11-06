@@ -7,7 +7,6 @@ import { LeftSider } from "@components/home/leftSider/LeftSider";
 import { RightSider } from "@components/home/rightSider/RightSider";
 import { playerStore } from "@store/player/Player.store";
 import { useSessionStore } from "@store/session/Session.store";
-import { useApiTokenProvider } from "@api/ApiToken.provider";
 import "./Home.css";
 
 export const Home: React.FC = observer(() => {
@@ -22,14 +21,13 @@ export const Home: React.FC = observer(() => {
     },
   ];
   useEffect(() => {
-    if (!useApiTokenProvider.accessToken) {
+    try {
       useSessionStore.refreshSession().then(() => {
         if (playerStore.tracks.length === 0) playerStore.getTrackStore();
         if (playerStore.myTracks.length === 0) playerStore.getMyTrack();
       });
-    } else {
+    } catch {
       if (playerStore.tracks.length === 0) playerStore.getTrackStore();
-      if (playerStore.myTracks.length === 0) playerStore.getMyTrack();
     }
   }, []);
   return (
