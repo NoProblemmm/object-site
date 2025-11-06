@@ -11,7 +11,6 @@ export const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
     const result = await authorizeUser(email, password);
-
     if (result.success) {
       res.json({
         user: result.user,
@@ -58,7 +57,6 @@ export const refreshMyToken = (req, res) => {
   }
   try {
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
-
     if (decoded.exp <= Math.floor(Date.now() / 1000)) {
       const tokens = generateTokens(decoded.userId, decoded.email);
       return res.json(tokens);
@@ -149,11 +147,9 @@ export const deleteMyTrack = (req, res) => {
     if (indexToRemove !== -1) {
       UserTrack.splice(indexToRemove, 1);
 
-      return res
-        .status(200)
-        .json({
-          message: "The track was successfully deleted from favorites.",
-        });
+      return res.status(200).json({
+        message: "The track was successfully deleted from favorites.",
+      });
     } else {
       return res
         .status(404)
@@ -161,5 +157,25 @@ export const deleteMyTrack = (req, res) => {
     }
   } catch {
     res.status(401).json({ message: "Track deletion error" });
+  }
+};
+
+// Отдать авторизованного пользователя
+export const getMyProfile = (req, res) => {
+  try {
+    const userId = req.user.userId.id;
+
+    if (!userId) {
+      res.status(404).json({ message: "The user was not found" });
+    }
+    const user = User.find((user) => user.id === userId);
+    res.status(200).json({
+      id: user.id,
+      image: user.image,
+      name: user.name,
+      email: user.email,
+    });
+  } catch {
+    res.status(401).json({ message: "Error server." });
   }
 };
