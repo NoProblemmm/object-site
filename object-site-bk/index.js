@@ -7,6 +7,7 @@ import {
   track,
   addMyTrack,
   deleteMyTrack,
+  getMyProfile,
 } from "./src/path/path.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -28,7 +29,8 @@ app.use(cookieParser());
 app.use(
   "/media",
   express.static("media/tracks/"),
-  express.static("media/imageTrack/")
+  express.static("media/imageTrack/"),
+  express.static("media/profileImage/")
 );
 
 // POST
@@ -55,6 +57,10 @@ app.get("/tracks", (req, res) => {
 
 app.get("/my-tracks", authenticateJWT, (req, res) => {
   myTrack(req, res);
+});
+
+app.get("/getMyProfile", authenticateJWT, (req, res) => {
+  getMyProfile(req, res);
 });
 
 // DELETE
