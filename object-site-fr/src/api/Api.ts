@@ -85,6 +85,15 @@ export const Api = () => {
     );
     return response;
   };
+
+  // Получить мой профиль
+  const getMyProfile = () => {
+    const token = useApiTokenProvider.accessToken;
+    const response = GET("getMyProfile", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response;
+  };
   return {
     signIn,
     signUp,
@@ -93,5 +102,6 @@ export const Api = () => {
     refreshToken,
     addMyTrack,
     deleteMyTrack,
+    getMyProfile,
   };
 };
