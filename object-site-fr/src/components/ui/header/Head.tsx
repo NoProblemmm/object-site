@@ -1,6 +1,10 @@
 import { LoadingStyles } from "./scripts/LoadingStyles";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "@tanstack/react-router";
+import { useSessionStore } from "@store/session/Session.store";
+import { useClickOutside } from "../../../hooks/useClickOutside";
+import { useProfileStore } from "@store/profile/Profile.store";
+import { observer } from "mobx-react-lite";
 import "./Head.css";
 
 interface ILink {
@@ -13,36 +17,89 @@ type TLink = {
   links: Array<ILink>;
 };
 
-export const Header = ({ links }: TLink) => {
+export const Header = observer(({ links }: TLink) => {
+  const [openMenu, setOpenMenu] = useState(false);
+  const menuRef = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
     LoadingStyles();
+  }, []);
+
+  useClickOutside({
+    ref: menuRef,
+    callback: () => setOpenMenu(false),
   });
 
   return (
-    <nav className="navigate">
-      <span className="navigate__logo">next track</span>
-      <ul>
-        <li className="navigate__item">
-          {links.map((link, index) => (
-            <a
-              key={index}
-              className="navigate__link"
-              onClick={(e) => {
-                e.preventDefault();
-                if (link.callback) {
-                  link.callback();
-                  navigate({ to: link.link });
-                } else if (link.link) {
-                  navigate({ to: link.link });
-                }
-              }}
+    <>
+      <nav className="navigate">
+        <span className="navigate__logo">next track</span>
+        {useSessionStore.isAutentificate ? (
+          <div className="navigate__profile-container">
+            <div className="navigate__profile-name">
+              {useProfileStore.user?.name}
+            </div>
+            <div
+              ref={menuRef}
+              className="navigate__profile"
+              onClick={() => setOpenMenu(!openMenu)}
             >
-              {link.name}
-            </a>
-          ))}
-        </li>
-      </ul>
-    </nav>
+              <img
+                src={
+                  useProfileStore.user?.image
+                    ? `${useProfileStore.user.image}`
+                    : "/static/hero.png"
+                }
+                alt="profileImg"
+                className="navigate__profile-menu"
+              />
+            </div>
+          </div>
+        ) : (
+          <ul>
+            <li className="navigate__item">
+              {links.map((link, index) => (
+                <a
+                  key={index}
+                  className="navigate__link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (link.callback) {
+                      link.callback();
+                      navigate({ to: link.link });
+                    } else if (link.link) {
+                      navigate({ to: link.link });
+                    }
+                  }}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </li>
+          </ul>
+        )}
+        <nav className={`dropMenu ${openMenu && "active"}`}>
+          <ul className="dropMenu__list">
+            {links.map((link, index) => (
+              <li
+                key={index}
+                className="dropMenu__item"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (link.callback) {
+                    link.callback();
+                    navigate({ to: link.link });
+                  } else if (link.link) {
+                    navigate({ to: link.link });
+                  }
+                }}
+              >
+                {link.name}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </nav>
+    </>
   );
-};
+});
