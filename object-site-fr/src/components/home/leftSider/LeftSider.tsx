@@ -19,21 +19,6 @@ export const LeftSider: React.FC = observer(() => {
     return () => clearInterval(interval);
   }, []);
 
-  document.addEventListener(
-    "click",
-    (event) => {
-      const targetEl = event.target as HTMLElement;
-      const isClickInsideMenu =
-        targetEl.closest(".track__menu") ||
-        targetEl.classList.contains("card__image");
-
-      if (!isClickInsideMenu) {
-        setTrackMenu(undefined);
-      }
-    },
-    false
-  );
-
   useEffect(() => {
     const handleDragStart = () => {
       setHighlighted(true);
