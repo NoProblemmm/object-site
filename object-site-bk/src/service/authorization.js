@@ -19,7 +19,6 @@ export async function authorizeUser(email, password) {
       return { success: false, message: "Invalid password!" };
     }
   }
-
   const token = generateTokens({ id: user.id, email: user.email });
   const accessToken = token.accessToken;
   const refreshToken = token.refreshToken;
