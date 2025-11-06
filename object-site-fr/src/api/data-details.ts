@@ -1,6 +1,7 @@
 export type IUserInfo = {
   id: number;
   name: string;
+  image?: string;
   email: string;
   password: string;
 };
@@ -19,6 +20,7 @@ export interface ISignUpRequest {
 export interface ISignInResponse {
   id: number;
   name: string;
+  image: string;
   email: string;
   accessToken: string;
   refreshToken: string;
