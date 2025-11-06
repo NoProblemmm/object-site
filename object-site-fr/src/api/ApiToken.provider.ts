@@ -9,10 +9,6 @@ export class ApiTokenProvider implements IApiTokenProvider {
 
   constructor() {
     makeAutoObservable(this);
-    const storedRefreshToken = localStorage.getItem("refresh_token");
-    if (storedRefreshToken) {
-      this.refreshToken = storedRefreshToken;
-    }
   }
 
   setAuthToken = (token: string | null) => {
