@@ -36,7 +36,7 @@ export const Api = () => {
   const refreshToken = async () => {
     const refreshToken = localStorage.getItem("refresh_token");
     if (!refreshToken) {
-      console.log("Нет токена рефреш");
+      console.log("Not session!");
     }
     const response = await POST("refresh-token", { refreshToken }, {});
     return response;
@@ -60,7 +60,17 @@ export const Api = () => {
       return response;
     } catch (error) {
       console.error("Ошибка загрузки моих треков:", error);
-      return {};
+    }
+  };
+
+  // Поиск трека (кодирование)
+  const searchTrack = async (name: string) => {
+    try {
+      const codeName = encodeURIComponent(name);
+      const response = await GET(`searchTrack?name=${codeName}`);
+      return response;
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -99,6 +109,7 @@ export const Api = () => {
     signUp,
     getTrack,
     getMyTrack,
+    searchTrack,
     refreshToken,
     addMyTrack,
     deleteMyTrack,
