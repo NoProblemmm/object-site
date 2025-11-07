@@ -1,25 +1,39 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { type IPlayerStates, type ITrack } from "./Player.type";
+import { TrackState, type IPlayerStore, type ITrack } from "./Player.type";
 import { Api } from "@api/Api";
 
-export class PlayerStore implements IPlayerStates {
+export class PlayerStore implements IPlayerStore {
   submenu = "Player";
+  currentTrackSource: TrackState = TrackState.Wind;
   isPlaying = false;
   isMyTrack = false;
   volume = 50;
   trackIndex = 0;
   myTrackIndex = 0;
+  searchTrackIndex = 0;
   tracks: ITrack[] = [];
   myTracks: ITrack[] = [];
+  searchTracks: ITrack[] = [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  setCurrentTrackSource(source: TrackState) {
+    this.currentTrackSource = source;
   }
 
   public getTrackStore = async () => {
     const response = await Api().getTrack();
     runInAction(() => {
       this.tracks = response as ITrack[];
+    });
+  };
+
+  public searchTrack = async (name: string) => {
+    const response = await Api().searchTrack(name);
+    runInAction(() => {
+      this.searchTracks = response as ITrack[];
     });
   };
 
@@ -49,22 +63,34 @@ export class PlayerStore implements IPlayerStates {
   };
 
   public selectTrack(index: number) {
-    if (this.isMyTrack) {
-      this.myTrackIndex = index;
-      this.isPlaying = true;
-    } else {
-      this.trackIndex = index;
-      this.isPlaying = true;
+    switch (this.currentTrackSource) {
+      case TrackState.Wind:
+        this.trackIndex = index;
+        this.isPlaying = true;
+        break;
+      case TrackState.Favorite:
+        this.myTrackIndex = index;
+        this.isPlaying = true;
+        break;
+      case TrackState.SearchTrack:
+        this.searchTrackIndex = index;
+        this.isPlaying = true;
+        break;
     }
   }
 
   public playTrack = (index: number) => {
-    this.isMyTrack = false;
+    this.currentTrackSource = TrackState.Wind;
     this.selectTrack(index);
   };
 
   public playMyTrack = (index: number) => {
-    this.isMyTrack = true;
+    this.currentTrackSource = TrackState.Favorite;
+    this.selectTrack(index);
+  };
+
+  public playSearchTrack = (index: number) => {
+    this.currentTrackSource = TrackState.SearchTrack;
     this.selectTrack(index);
   };
 
@@ -77,29 +103,48 @@ export class PlayerStore implements IPlayerStates {
   }
 
   nextTrack() {
-    if (this.isMyTrack) {
-      this.myTrackIndex++;
-      if (this.myTrackIndex >= this.myTracks.length) {
-        this.myTrackIndex = 0;
-      }
-    } else {
-      this.trackIndex++;
-      if (this.trackIndex >= this.tracks.length) {
-        this.trackIndex = 0;
-      }
+    switch (this.currentTrackSource) {
+      case TrackState.Wind:
+        this.trackIndex++;
+        if (this.trackIndex >= this.tracks.length) {
+          this.trackIndex = 0;
+        }
+        break;
+      case TrackState.Favorite:
+        this.myTrackIndex++;
+        if (this.myTrackIndex >= this.myTracks.length) {
+          this.myTrackIndex = 0;
+        }
+        break;
+      case TrackState.SearchTrack:
+        this.searchTrackIndex++;
+        if (this.searchTrackIndex >= this.searchTracks.length) {
+          this.searchTrackIndex = 0;
+        }
+        break;
     }
   }
 
   previousTrack() {
-    if (this.isMyTrack) {
-      this.myTrackIndex--;
-      if (this.myTrackIndex < 0) {
-        this.myTrackIndex = this.myTracks.length - 1;
-      }
-    }
-    this.trackIndex--;
-    if (this.trackIndex < 0) {
-      this.trackIndex = this.tracks.length - 1;
+    switch (this.currentTrackSource) {
+      case TrackState.Wind:
+        this.trackIndex--;
+        if (this.trackIndex < 0) {
+          this.trackIndex = this.tracks.length - 1;
+        }
+        break;
+      case TrackState.Favorite:
+        this.myTrackIndex--;
+        if (this.myTrackIndex < 0) {
+          this.myTrackIndex = this.myTracks.length - 1;
+        }
+        break;
+      case TrackState.SearchTrack:
+        this.searchTrackIndex--;
+        if (this.searchTrackIndex < 0) {
+          this.searchTrackIndex = this.searchTracks.length - 1;
+        }
+        break;
     }
   }
 
