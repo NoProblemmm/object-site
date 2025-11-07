@@ -1,15 +1,21 @@
 import { useEffect, useState, useRef } from "react";
 import { playerStore } from "@store/player/Player.store";
+import { TrackState } from "@store/player/Player.type";
 
 export const PlayerLogic = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const currentTrack = playerStore.isMyTrack
-    ? playerStore.myTracks.length > 0
-      ? playerStore.myTracks[playerStore.myTrackIndex]
-      : null
-    : playerStore.tracks.length > 0
-      ? playerStore.tracks[playerStore.trackIndex]
-      : null;
+  const currentTrack =
+    playerStore.currentTrackSource === TrackState.Favorite
+      ? playerStore.myTracks.length > 0
+        ? playerStore.myTracks[playerStore.myTrackIndex]
+        : null
+      : playerStore.currentTrackSource === TrackState.SearchTrack
+        ? playerStore.searchTracks.length > 0
+          ? playerStore.searchTracks[playerStore.searchTrackIndex]
+          : null
+        : playerStore.tracks.length > 0
+          ? playerStore.tracks[playerStore.trackIndex]
+          : null;
 
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -26,7 +32,12 @@ export const PlayerLogic = () => {
       }
     }, 500);
     return () => clearInterval(interval);
-  }, [isSeeking, playerStore.trackIndex, playerStore.myTrackIndex]);
+  }, [
+    isSeeking,
+    playerStore.trackIndex,
+    playerStore.myTrackIndex,
+    playerStore.searchTrackIndex,
+  ]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -36,7 +47,12 @@ export const PlayerLogic = () => {
         audioRef.current.pause();
       }
     }
-  }, [playerStore.isPlaying, playerStore.trackIndex, playerStore.myTrackIndex]);
+  }, [
+    playerStore.isPlaying,
+    playerStore.trackIndex,
+    playerStore.myTrackIndex,
+    playerStore.searchTrackIndex,
+  ]);
 
   const handleEnded = () => {
     playerStore.nextTrack();

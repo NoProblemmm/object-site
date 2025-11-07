@@ -1,7 +1,8 @@
 import { playerStore } from "@store/player/Player.store";
 import { PlayerLogic } from "../hooks/PlayerLogic";
-import "./PlayerMenu.css";
 import { observer } from "mobx-react-lite";
+import { useSessionStore } from "@store/session/Session.store";
+import "./PlayerMenu.css";
 export const PlayerMenu = observer(() => {
   const { currentTrack } = PlayerLogic();
 
@@ -15,7 +16,8 @@ export const PlayerMenu = observer(() => {
   };
   return (
     <div className="menu__container">
-      {playerStore.myTracks.find((track) => track.id === currentTrack?.id) ? (
+      {useSessionStore.isAutentificate &&
+      playerStore.myTracks.find((track) => track.id === currentTrack?.id) ? (
         <img
           className="control add__item"
           src="/static/player/check.svg"

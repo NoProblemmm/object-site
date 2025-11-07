@@ -1,0 +1,83 @@
+.sider__container {
+  display: inline-flex;
+  position: initial;
+  border-radius: 10px;
+  width: 3%;
+  height: screen;
+  margin-top: 70px;
+  background-color: rgba(44, 44, 44, 0.26);
+  transition: all 0.5s;
+}
+
+.sider__container.active {
+  width: 30%;
+  display: block;
+}
+.rightsider__navigate {
+  display: flex;
+}
+
+.sider__closed {
+  cursor: pointer;
+  width: 40px;
+  height: 100%;
+  transform: rotate(-180deg);
+  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
+    contrast(95%);
+  transition: all 0.5s;
+}
+.sider__closed:hover {
+  transform: rotate(-180deg) scale(1.1);
+  filter: invert(90%) sepia(100%) saturate(90%) hue-rotate(25deg)
+    brightness(100%) contrast(105%);
+}
+.sider__closed.active {
+  margin-top: 15px;
+  width: 40px;
+  transform: rotate(0deg);
+  height: 30px;
+}
+
+.rightsider__input-container {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+.rightsider__input {
+  margin: 5px 5px 0 0;
+  width: 100%;
+  color: #ffffff;
+  border: none;
+  border-bottom: 1px solid #636363;
+  background-color: rgba(240, 248, 255, 0);
+  height: 30px;
+  transition: all 0.5s;
+}
+
+.rightsider__input:hover {
+  transform: scale(1.05);
+}
+
+.rightsider__input:focus {
+  outline: 0;
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.rightsider__search {
+  cursor: pointer;
+  margin: 5px 5px 0 0;
+  height: 30px;
+  width: 30px;
+  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
+    contrast(95%);
+  transition: all 0.5s;
+}
+
+.rightsider__search:hover {
+  transform: scale(1.1);
+  filter: invert(90%) sepia(100%) saturate(90%) hue-rotate(25deg)
+    brightness(100%) contrast(105%);
+}
