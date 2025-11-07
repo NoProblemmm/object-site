@@ -4,6 +4,7 @@ import {
   signUp,
   myTrack,
   refreshMyToken,
+  searchTrack,
   track,
   addMyTrack,
   deleteMyTrack,
@@ -57,6 +58,10 @@ app.get("/tracks", (req, res) => {
 
 app.get("/my-tracks", authenticateJWT, (req, res) => {
   myTrack(req, res);
+});
+
+app.get("/searchTrack", (req, res) => {
+  searchTrack(req, res);
 });
 
 app.get("/getMyProfile", authenticateJWT, (req, res) => {

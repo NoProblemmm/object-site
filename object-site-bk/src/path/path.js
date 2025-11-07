@@ -108,6 +108,24 @@ export const myTrack = (req, res) => {
   }
 };
 
+// Поиск объектов mp3
+export const searchTrack = (req, res) => {
+  try {
+    const { name } = req.query;
+    if (!name) {
+      return res.status(400).json({ message: "Search is missing" });
+    }
+
+    const results = Track.filter((track) =>
+      track.name.toLowerCase().includes(name.toLowerCase())
+    );
+
+    return res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error..." });
+  }
+};
 // Добавление в избранное объекта mp3
 export const addMyTrack = (req, res) => {
   try {
