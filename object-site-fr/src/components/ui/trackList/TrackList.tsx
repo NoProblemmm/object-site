@@ -7,9 +7,10 @@ import "./TrackList.css";
 
 type TProps = {
   item: ITrack;
+  search: boolean;
 };
 export const TrackList = React.memo(
-  observer(({ item }: TProps) => {
+  observer(({ item, search }: TProps) => {
     const audioRef = useRef<HTMLAudioElement>(null);
     const [duration, setDuration] = useState(0);
     const [trackMenu, setTrackMenu] = useState<number | undefined>();
@@ -43,14 +44,28 @@ export const TrackList = React.memo(
     );
 
     const handelSelectTrack = (item: ITrack) => {
-      const selectTrack = playerStore.myTracks.findIndex(
-        (track) => track.id === item.id
-      );
-      playerStore.playMyTrack(selectTrack);
-      playerStore.menuPage("Player");
+      if (search) {
+        const selectTrack = playerStore.searchTracks.findIndex(
+          (track) => track.id === item.id
+        );
+
+        playerStore.playSearchTrack(selectTrack);
+        playerStore.menuPage("Player");
+      } else {
+        const selectTrack = playerStore.myTracks.findIndex(
+          (track) => track.id === item.id
+        );
+        playerStore.playMyTrack(selectTrack);
+        playerStore.menuPage("Player");
+      }
     };
     const handelDeleteTrack = async (trackId: number) => {
       await playerStore.deleteMyTrack(trackId);
+    };
+
+    const handelAddTrack = async (trackId: number) => {
+      await playerStore.addMyTrack(trackId);
+      setTrackMenu(undefined);
     };
 
     return (
@@ -61,14 +76,21 @@ export const TrackList = React.memo(
           className="card__image"
           onClick={() => handelSelectTrack(item)}
         />
-        <div className="card__title-container">
+        <div
+          className="card__title-container"
+          onClick={() => handelSelectTrack(item)}
+        >
           <span className="card__title">{item.name}</span>
           <span className="card__author">{item.author}</span>
         </div>
         {trackMenu === item.id ? (
           <div className="track__menu">
             <ul>
-              <li onClick={() => handelDeleteTrack(item.id)}>Delete</li>
+              {search ? (
+                <li onClick={() => handelAddTrack(item.id)}>Add</li>
+              ) : (
+                <li onClick={() => handelDeleteTrack(item.id)}>Delete</li>
+              )}
             </ul>
           </div>
         ) : (

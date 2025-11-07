@@ -1,6 +1,7 @@
 import { playerStore } from "@store/player/Player.store";
-import "./TabMenu.css";
 import { observer } from "mobx-react-lite";
+import { TrackState } from "@store/player/Player.type";
+import "./TabMenu.css";
 
 export const TabMenu = observer(() => {
   const handleMenu = (item: string) => {
@@ -9,7 +10,7 @@ export const TabMenu = observer(() => {
   return (
     <div className="tabmenu__container">
       <ul className="tabmenu__menu">
-        {playerStore.isMyTrack && (
+        {playerStore.currentTrackSource !== TrackState.Wind && (
           <li
             className="item__wind"
             onClick={() =>

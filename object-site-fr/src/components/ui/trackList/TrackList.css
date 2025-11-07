@@ -1,12 +1,18 @@
 .card__container-sider {
   border-radius: 5px;
   margin-bottom: 3px;
+  cursor: pointer;
   display: flex;
   padding: 4px;
   justify-content: space-between;
   width: 100%;
   align-items: center;
   background-color: rgba(41, 41, 41, 0.507);
+  transition: all 0.5s;
+}
+.card__container-sider:hover {
+  transform: scale(0.95);
+  background-color: rgba(0, 255, 221, 0.096);
 }
 
 .card__title-container {
