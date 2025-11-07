@@ -22,12 +22,19 @@ export const Home: React.FC = observer(() => {
   ];
   useEffect(() => {
     try {
-      useSessionStore.refreshSession().then(() => {
-        if (playerStore.tracks.length === 0) playerStore.getTrackStore();
-        if (playerStore.myTracks.length === 0) playerStore.getMyTrack();
-      });
-    } catch {
-      if (playerStore.tracks.length === 0) playerStore.getTrackStore();
+      useSessionStore
+        .refreshSession()
+        .then(() => {
+          if (!playerStore.tracks || playerStore.tracks.length === 0)
+            playerStore.getTrackStore();
+          if (!playerStore.myTracks || playerStore.myTracks.length === 0)
+            playerStore.getMyTrack();
+        })
+        .catch((error) => {
+          console.error("Error update session:", error);
+        });
+    } catch (err) {
+      console.error("Service error:", err);
     }
   }, []);
   return (

@@ -13,7 +13,6 @@ export interface IPlayerStore extends IPlayerState, IPlayerMethods {}
 
 export interface IPlayerState {
   isPlaying: boolean;
-  isMyTrack: boolean;
   volume: number;
   trackIndex: number;
   myTrackIndex: number;

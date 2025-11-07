@@ -36,6 +36,9 @@ export const SignUp: React.FC = () => {
               {...register("name", { required: true })}
               placeholder="Name"
             ></Input>
+            {errors.name && (
+              <p className="form__error">{errors.name.message}</p>
+            )}
             <Input
               {...register("email", { required: true })}
               placeholder="E-mail"

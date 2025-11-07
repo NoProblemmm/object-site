@@ -25,4 +25,5 @@ export const nameValidation = z
   })
   .refine((value) => isName(value), {
     message: "In the field: Name an error was made!\nExample: 'Name/Имя'",
-  });
+  })
+  .max(30, { message: "Max 30 symbols" });

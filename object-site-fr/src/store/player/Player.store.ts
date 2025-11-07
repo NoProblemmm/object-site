@@ -6,7 +6,6 @@ export class PlayerStore implements IPlayerStore {
   submenu = "Player";
   currentTrackSource: TrackState = TrackState.Wind;
   isPlaying = false;
-  isMyTrack = false;
   volume = 50;
   trackIndex = 0;
   myTrackIndex = 0;
@@ -151,6 +150,12 @@ export class PlayerStore implements IPlayerStore {
   seekTo(time: any) {
     console.log("Перемотка на:", time);
   }
+
+  clear = () => {
+    this.tracks = [];
+    this.myTracks = [];
+    this.searchTracks = [];
+  };
 }
 
 export const playerStore = new PlayerStore();

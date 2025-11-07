@@ -17,6 +17,7 @@ export const PlayerMenu = observer(() => {
   return (
     <div className="menu__container">
       {useSessionStore.isAutentificate &&
+      playerStore.myTracks &&
       playerStore.myTracks.find((track) => track.id === currentTrack?.id) ? (
         <img
           className="control add__item"
