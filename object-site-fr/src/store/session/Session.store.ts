@@ -5,6 +5,7 @@ import type { TSessionStore } from "./Session.type";
 import type { ISignInRequest, ISignInResponse } from "@api/data-details";
 import { ApiTokenProvider, useApiTokenProvider } from "@api/ApiToken.provider";
 import { useProfileStore } from "@store/profile/Profile.store";
+import { playerStore } from "@store/player/Player.store";
 
 class SessionStore implements TSessionStore {
   public dataHolder = new DataHolder<string | null>(null);
@@ -45,8 +46,10 @@ class SessionStore implements TSessionStore {
 
   public clear = () => {
     this.dataHolder.clear();
+    playerStore.clear();
     useProfileStore.clear();
-    localStorage.removeItem("refresh_token");
+    sessionStorage.clear();
+    useApiTokenProvider.clear();
   };
   public isLogout = () => {
     this.clear();
