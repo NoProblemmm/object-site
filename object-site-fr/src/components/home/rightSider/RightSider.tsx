@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { observer } from "mobx-react-lite";
 import { Input } from "@components/ui/input/Input";
-import "./RightSider.css";
 import { playerStore } from "@store/player/Player.store";
 import { TrackList } from "@components/ui/trackList/TrackList";
-import { observer } from "mobx-react-lite";
+import "./RightSider.css";
 export const RightSider: React.FC = observer(() => {
   const [isSiderMenu, setIsSiderMenu] = useState(false);
   const [inputValue, setInputValue] = useState("");
