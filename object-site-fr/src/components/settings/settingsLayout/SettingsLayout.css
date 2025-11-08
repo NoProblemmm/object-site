@@ -1,0 +1,79 @@
+.settingslayout__container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 51.7rem;
+}
+
+.settingslayout__card-container {
+  padding: 70px 15px 15px 15px;
+  width: 40%;
+  height: 100%;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  background-color: rgba(48, 48, 48, 0.034);
+}
+
+.settingslayout__card {
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  padding: 0 0 0 30px;
+  align-items: center;
+  border: 1px solid #000000;
+  border-radius: 7px;
+  height: 70px;
+  background-color: rgba(95, 95, 95, 0.171);
+  transition: all 0.5s;
+  z-index: auto;
+}
+
+.settingslayout__card:hover {
+  transform: scale(1.02);
+  background-color: rgba(0, 90, 63, 0.384);
+  border: 1px solid #006446;
+}
+
+.settingslayout__dropdown-menu {
+  width: 1%;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 7px;
+  opacity: 0;
+  height: 0%;
+  visibility: hidden;
+  background-color: rgba(95, 95, 95, 0.171);
+  transform: translateY(-85px);
+  transition: all 0.5s;
+  padding: 3px;
+}
+
+.settingslayout__dropdown-menu.active {
+  display: block;
+  position: initial;
+  visibility: visible;
+  width: 100%;
+  border: 1px solid #000000;
+  height: auto;
+  opacity: 1;
+  align-items: center;
+  transform: translateY(2px);
+  margin-bottom: 5px;
+}
+
+.settingslayout__menu {
+  padding-left: 30px;
+  display: flex;
+  width: 100%;
+  border: 1px solid #303030a2;
+  border-radius: 5px;
+  align-items: center;
+  height: 50px;
+  transition: all 0.5s;
+}
+
+.settingslayout__menu:hover {
+  transform: scale(0.99);
+  background-color: rgba(0, 90, 63, 0.384);
+  border: 1px solid #006446;
+}
