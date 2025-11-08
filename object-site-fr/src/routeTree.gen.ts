@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthSignUpRouteImport } from './routes/auth/signUp'
 import { Route as AuthSignInRouteImport } from './routes/auth/signIn'
@@ -18,6 +19,11 @@ import { Route as AuthResetPasswordRouteImport } from './routes/auth/resetPasswo
 const WelcomeRoute = WelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,6 +49,7 @@ const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
   '/auth/resetPassword': typeof AuthResetPasswordRoute
   '/auth/signIn': typeof AuthSignInRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
   '/auth/resetPassword': typeof AuthResetPasswordRoute
   '/auth/signIn': typeof AuthSignInRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
   '/welcome': typeof WelcomeRoute
   '/auth/resetPassword': typeof AuthResetPasswordRoute
   '/auth/signIn': typeof AuthSignInRoute
@@ -67,15 +76,23 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/settings'
     | '/welcome'
     | '/auth/resetPassword'
     | '/auth/signIn'
     | '/auth/signUp'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/welcome' | '/auth/resetPassword' | '/auth/signIn' | '/auth/signUp'
+  to:
+    | '/'
+    | '/settings'
+    | '/welcome'
+    | '/auth/resetPassword'
+    | '/auth/signIn'
+    | '/auth/signUp'
   id:
     | '__root__'
     | '/'
+    | '/settings'
     | '/welcome'
     | '/auth/resetPassword'
     | '/auth/signIn'
@@ -84,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SettingsRoute: typeof SettingsRoute
   WelcomeRoute: typeof WelcomeRoute
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
@@ -97,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/welcome'
       fullPath: '/welcome'
       preLoaderRoute: typeof WelcomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -132,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SettingsRoute: SettingsRoute,
   WelcomeRoute: WelcomeRoute,
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,
