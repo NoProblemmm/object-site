@@ -19,6 +19,8 @@ export default defineConfig({
       "@store": path.resolve(__dirname, "src/store/"),
       "@api": path.resolve(__dirname, "src/api/"),
       "@common": path.resolve(__dirname, "src/common/"),
+      "@theme": path.resolve(__dirname, "src/theme/"),
+      "@locales": path.resolve(__dirname, "src/locales/"),
     },
   },
 });
