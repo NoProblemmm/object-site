@@ -57,9 +57,14 @@ export const PlayerMenu = observer(() => {
         onClick={() => playerStore.nextTrack()}
       />
       <img
-        className="control mix__item"
-        src="/static/player/double.svg"
+        className={`control mix__item ${playerStore.isShuffle && "active"}`}
+        src={
+          playerStore.isShuffle
+            ? "/static/player/unshuffle.svg"
+            : "/static/player/shuffle.svg"
+        }
         alt="mixItemAdd"
+        onClick={() => playerStore.toggleShuffleTrack()}
       />
     </div>
   );
