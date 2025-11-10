@@ -15,9 +15,10 @@ interface ILink {
 
 type TLink = {
   links: Array<ILink>;
+  style?: string;
 };
 
-export const Header = observer(({ links }: TLink) => {
+export const Header = observer(({ links, style }: TLink) => {
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
@@ -32,16 +33,16 @@ export const Header = observer(({ links }: TLink) => {
 
   return (
     <>
-      <nav className="navigate">
-        <span className="navigate__logo">next track</span>
+      <nav className="navigate ">
+        <span className={`navigate__logo ${style}`}>next track</span>
         {useSessionStore.isAutentificate ? (
           <div className="navigate__profile-container">
-            <div className="navigate__profile-name">
+            <div className={`navigate__profile-name ${style}`}>
               {useProfileStore.user?.name}
             </div>
             <div
               ref={menuRef}
-              className="navigate__profile"
+              className="navigate__profile "
               onClick={() => setOpenMenu(!openMenu)}
             >
               <img
@@ -57,11 +58,11 @@ export const Header = observer(({ links }: TLink) => {
           </div>
         ) : (
           <ul>
-            <li className="navigate__item">
+            <li className={`navigate__item ${style}`}>
               {links.map((link, index) => (
                 <a
                   key={index}
-                  className="navigate__link"
+                  className={`navigate__link ${style}`}
                   onClick={(e) => {
                     e.preventDefault();
                     if (link.callback) {

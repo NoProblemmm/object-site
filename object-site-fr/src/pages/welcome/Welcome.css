@@ -1,0 +1,6 @@
+.text-color {
+  color: #fff !important;
+}
+.text-color:hover {
+  border-color: gray;
+}

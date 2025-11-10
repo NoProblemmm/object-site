@@ -19,8 +19,8 @@ export const LIGHT_THEME_COLOR: ColorTheme = {
     },
   },
   trackList: {
-    background: "rgba(41, 41, 41, 0.507)",
-    backgroundActive: "rgba(0, 255, 221, 0.096)",
+    background: "rgba(122, 122, 122, 0.51)",
+    backgroundActive: "rgba(85, 155, 144, 0.57)",
   },
   rightSider: {
     background: "rgba(44, 44, 44, 0.26)",

@@ -17,6 +17,7 @@
   font-size: calc(var(--index) * 8);
   position: absolute;
   width: min-content;
+  color: #c5c5c5;
   bottom: 12vh;
   line-height: 0.9;
 }

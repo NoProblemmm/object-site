@@ -4,6 +4,7 @@ import { Hero } from "@components/welcome/hero/Hero";
 import { Layout } from "@components/welcome/layout/Layout";
 import { Header } from "@components/ui/header/Head";
 import { Footer } from "@components/ui/footer/Footer";
+import "./Welcome.css";
 
 export const Welcome = () => {
   const links = [{ name: "Music", link: "/" }];
@@ -13,7 +14,7 @@ export const Welcome = () => {
 
   return (
     <div className="wrapper">
-      <Header links={links} />
+      <Header links={links} style={"text-color"} />
       <div className="welcome-content">
         <Hero />
         <Layout />
