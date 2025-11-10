@@ -6,6 +6,7 @@ export class PlayerStore implements IPlayerStore {
   submenu = "Player";
   currentTrackSource: TrackState = TrackState.Wind;
   isPlaying = false;
+  isShuffle = false;
   volume = 50;
   trackIndex = 0;
   myTrackIndex = 0;
@@ -13,10 +14,47 @@ export class PlayerStore implements IPlayerStore {
   tracks: ITrack[] = [];
   myTracks: ITrack[] = [];
   searchTracks: ITrack[] = [];
+  shuffleTracks: ITrack[] = [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
   }
+
+  toggleShuffleTrack = () => {
+    this.isShuffle = !this.isShuffle;
+  };
+
+  shuffleTrack = () => {
+    switch (this.currentTrackSource) {
+      case TrackState.Wind:
+        this.shuffleTracks = this.tracks;
+        break;
+      case TrackState.Favorite:
+        this.shuffleTracks = this.myTracks;
+        break;
+      case TrackState.SearchTrack:
+        this.shuffleTracks = this.searchTracks;
+        break;
+    }
+
+    if (this.shuffleTracks.length === 0) return;
+
+    const randomIndex = Math.floor(Math.random() * this.shuffleTracks.length);
+
+    switch (this.currentTrackSource) {
+      case TrackState.Wind:
+        this.trackIndex = randomIndex;
+        break;
+      case TrackState.Favorite:
+        this.myTrackIndex = randomIndex;
+        break;
+      case TrackState.SearchTrack:
+        this.searchTrackIndex = randomIndex;
+        break;
+    }
+
+    this.isPlaying = true;
+  };
 
   setCurrentTrackSource(source: TrackState) {
     this.currentTrackSource = source;
@@ -102,48 +140,56 @@ export class PlayerStore implements IPlayerStore {
   }
 
   nextTrack() {
-    switch (this.currentTrackSource) {
-      case TrackState.Wind:
-        this.trackIndex++;
-        if (this.trackIndex >= this.tracks.length) {
-          this.trackIndex = 0;
-        }
-        break;
-      case TrackState.Favorite:
-        this.myTrackIndex++;
-        if (this.myTrackIndex >= this.myTracks.length) {
-          this.myTrackIndex = 0;
-        }
-        break;
-      case TrackState.SearchTrack:
-        this.searchTrackIndex++;
-        if (this.searchTrackIndex >= this.searchTracks.length) {
-          this.searchTrackIndex = 0;
-        }
-        break;
+    if (this.isShuffle) {
+      this.shuffleTrack();
+    } else {
+      switch (this.currentTrackSource) {
+        case TrackState.Wind:
+          this.trackIndex++;
+          if (this.trackIndex >= this.tracks.length) {
+            this.trackIndex = 0;
+          }
+          break;
+        case TrackState.Favorite:
+          this.myTrackIndex++;
+          if (this.myTrackIndex >= this.myTracks.length) {
+            this.myTrackIndex = 0;
+          }
+          break;
+        case TrackState.SearchTrack:
+          this.searchTrackIndex++;
+          if (this.searchTrackIndex >= this.searchTracks.length) {
+            this.searchTrackIndex = 0;
+          }
+          break;
+      }
     }
   }
 
   previousTrack() {
-    switch (this.currentTrackSource) {
-      case TrackState.Wind:
-        this.trackIndex--;
-        if (this.trackIndex < 0) {
-          this.trackIndex = this.tracks.length - 1;
-        }
-        break;
-      case TrackState.Favorite:
-        this.myTrackIndex--;
-        if (this.myTrackIndex < 0) {
-          this.myTrackIndex = this.myTracks.length - 1;
-        }
-        break;
-      case TrackState.SearchTrack:
-        this.searchTrackIndex--;
-        if (this.searchTrackIndex < 0) {
-          this.searchTrackIndex = this.searchTracks.length - 1;
-        }
-        break;
+    if (this.isShuffle) {
+      this.shuffleTrack();
+    } else {
+      switch (this.currentTrackSource) {
+        case TrackState.Wind:
+          this.trackIndex--;
+          if (this.trackIndex < 0) {
+            this.trackIndex = this.tracks.length - 1;
+          }
+          break;
+        case TrackState.Favorite:
+          this.myTrackIndex--;
+          if (this.myTrackIndex < 0) {
+            this.myTrackIndex = this.myTracks.length - 1;
+          }
+          break;
+        case TrackState.SearchTrack:
+          this.searchTrackIndex--;
+          if (this.searchTrackIndex < 0) {
+            this.searchTrackIndex = this.searchTracks.length - 1;
+          }
+          break;
+      }
     }
   }
 
