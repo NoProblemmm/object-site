@@ -30,6 +30,7 @@
 .cover__multi {
   transform: scale(1.05);
   filter: brightness(100%);
+
   opacity: 1;
   border-radius: 30px;
   border: none;
@@ -87,6 +88,7 @@
       0px 0px 0px 0px hsla(281, 100%, 50%, 0),
       0px 0px 0px 0px hsla(234, 100%, 50%, 0);
   }
+
   25% {
     box-shadow:
       2px -2px 25px 25px hsl(0, 100%, 50%),
@@ -112,7 +114,6 @@
 .cover {
   display: inline-flex;
   align-items: center;
-
   border-radius: 15px;
   width: 100%;
   max-width: 300px;
@@ -123,7 +124,7 @@
 
 .cover__container {
   height: 21rem;
-  margin-bottom: 1px;
+  margin-bottom: 3rem;
 }
 
 .name__compose {
@@ -189,8 +190,7 @@
   width: 40px;
   opacity: 1;
   transition: all 0.1s;
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
+  filter: var(--svgItemsFilter);
 }
 .volume__image-isVolume {
   opacity: 0;

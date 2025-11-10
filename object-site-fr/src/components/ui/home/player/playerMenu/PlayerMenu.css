@@ -8,20 +8,17 @@
 .control {
   width: 50px;
   cursor: pointer;
-  filter: invert(23%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
+  filter: var(--svgItemsFilter);
   transition: all 0.3s;
 }
 
 .control:hover {
   transform: scale(110%);
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
+  filter: var(--svgItemsFilterActive);
 }
 
 .add__item {
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
+  filter: var(--svgItemsFilter);
 }
 
 .left-control {
@@ -30,16 +27,22 @@
 
 .left-control:hover {
   transform: rotate(-180deg) scale(110%);
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
+  filter: var(--svgItemsFilterActive);
 }
 .mix__item {
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
+  filter: var(--svgItemsFilter);
+  transition: all 0.5s;
+}
+
+.mix__item.active {
+  transform: scale(1.2);
+}
+
+.mix__item.active:hover {
+  transform: scale(1.1);
 }
 
 .right-control:hover {
   transform: scale(110%);
-  filter: invert(30%) sepia(4%) saturate(8%) hue-rotate(345deg) brightness(99%)
-    contrast(95%);
+  filter: var(--svgItemsFilterActive);
 }

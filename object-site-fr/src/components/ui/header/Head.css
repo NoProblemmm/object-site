@@ -2,7 +2,7 @@
   position: sticky;
   top: 0px;
   height: 70px;
-  background-color: rgba(0, 0, 0, 0.034);
+  background-color: var(--headerBackground);
   opacity: 0.75;
   display: flex;
   justify-content: space-between;
@@ -16,7 +16,7 @@
   list-style-type: none;
 }
 .navigate__logo {
-  color: white;
+  color: var(--text);
   font-size: 2rem;
 }
 
@@ -33,7 +33,7 @@
 .navigate__link {
   font-size: 1rem;
   text-decoration: none;
-  color: white;
+  color: var(--text);
   text-align: center;
   padding: 10px;
   margin: 0 5px;
@@ -44,7 +44,7 @@
 }
 
 .navigate__link:hover {
-  border-color: white;
+  border-color: var(--text);
   transition: 250ms;
   cursor: pointer;
 }
@@ -73,8 +73,8 @@
   right: 10px;
   width: 220px;
   padding: 10px;
-  background-color: #202020;
-  border: 1px solid #424242;
+  background-color: var(--headerDropMenuBackground);
+  border: 1px solid var(--headerDropMenuBorder);
   border-radius: 7px;
   opacity: 0;
   transform: translateY(-80px) scale(0.3) translateX(150px);
@@ -97,17 +97,17 @@
 .dropMenu__item {
   display: flex;
   padding: 10px;
-  border-bottom: 1px solid #444444;
+  border-bottom: 1px solid var(--headerDropMenuItemBorder);
   align-items: center;
   font-size: 15px;
   font-weight: 500;
-  color: rgb(255, 255, 255);
+  color: var(--text);
   cursor: pointer;
   transition: all 0.1s;
 }
 .dropMenu__item:hover {
   transform: scale(1.01);
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1px solid var(--text);
 }
 
 .dropMenu__item:nth-child(n + 2) {
@@ -128,7 +128,7 @@
   transform: translateY(-50%) translateX(50px) scale(0.1);
   opacity: 0;
   visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.048);
+  background-color: var(--headerDropMenuBackground);
   padding: 11px;
   border-radius: 5px;
   transition: all 0.5s ease;

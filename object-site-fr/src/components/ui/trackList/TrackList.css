@@ -7,12 +7,12 @@
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  background-color: rgba(41, 41, 41, 0.507);
+  background-color: var(--trackListBackground);
   transition: all 0.5s;
 }
 .card__container-sider:hover {
   transform: scale(0.95);
-  background-color: rgba(0, 255, 221, 0.096);
+  background-color: var(--trackListBackgroundActive);
 }
 
 .card__title-container {
@@ -59,7 +59,7 @@
   border-radius: 15px;
   padding: 10px;
   transition: all 0.5s;
-  background-color: rgba(46, 46, 46, 0.979);
+  background-color: var(--gray2);
 }
 
 .track__menu:hover {

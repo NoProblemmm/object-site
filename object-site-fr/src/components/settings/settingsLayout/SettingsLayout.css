@@ -9,9 +9,9 @@
   padding: 70px 15px 15px 15px;
   width: 40%;
   height: 100%;
-  border: 1px solid #000000;
+  border: 1px solid var(--settingsSettingsItemBorder);
   border-radius: 20px;
-  background-color: rgba(48, 48, 48, 0.034);
+  background-color: var(--settingsBackground);
 }
 
 .settingslayout__card {
@@ -20,18 +20,18 @@
   cursor: pointer;
   padding: 0 0 0 30px;
   align-items: center;
-  border: 1px solid #000000;
+  border: 1px solid var(--settingsSettingsItemBorder);
   border-radius: 7px;
   height: 70px;
-  background-color: rgba(95, 95, 95, 0.171);
+  background-color: var(--settingsSettingsItemBackground);
   transition: all 0.5s;
   z-index: auto;
 }
 
 .settingslayout__card:hover {
   transform: scale(1.02);
-  background-color: rgba(0, 90, 63, 0.384);
-  border: 1px solid #006446;
+  background-color: var(--settingsSettingsItemBackgroundActive);
+  border: 1px solid var(--settingsSettingsItemBorderActive);
 }
 
 .settingslayout__dropdown-menu {
@@ -42,7 +42,7 @@
   opacity: 0;
   height: 0%;
   visibility: hidden;
-  background-color: rgba(95, 95, 95, 0.171);
+  background-color: var(--settingsSettingsItemBackground);
   transform: translateY(-85px);
   transition: all 0.5s;
   padding: 3px;
@@ -53,19 +53,23 @@
   position: initial;
   visibility: visible;
   width: 100%;
-  border: 1px solid #000000;
+  border: 1px solid var(--settingsSettingsItemBorder);
   height: auto;
   opacity: 1;
   align-items: center;
   transform: translateY(2px);
   margin-bottom: 5px;
 }
+.settingslayout__dropdown-menu:hover {
+  background-color: var(--settingsSettingsItemBackgroundActive);
+  border: 1px solid var(--settingsSettingsItemBorderActive);
+}
 
 .settingslayout__menu {
   padding-left: 30px;
   display: flex;
   width: 100%;
-  border: 1px solid #303030a2;
+  border: 1px solid var(--settingsSettingsItemBorder);
   border-radius: 5px;
   align-items: center;
   height: 50px;
@@ -74,6 +78,6 @@
 
 .settingslayout__menu:hover {
   transform: scale(0.99);
-  background-color: rgba(0, 90, 63, 0.384);
-  border: 1px solid #006446;
+  background-color: var(--settingsSettingsItemBackgroundActive);
+  border: 1px solid var(--settingsSettingsItemBorderActive);
 }
