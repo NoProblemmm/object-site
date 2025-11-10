@@ -7,6 +7,7 @@ import { useSessionStore } from "@store/session/Session.store";
 import { signInFormValidation, type TSignInSchema } from "./validations";
 import type { ISignInRequest } from "@api/data-details";
 import "./auth.css";
+import { Footer } from "@components/ui/footer/Footer";
 
 export const SignIn: React.FC = () => {
   const {
@@ -74,6 +75,7 @@ export const SignIn: React.FC = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

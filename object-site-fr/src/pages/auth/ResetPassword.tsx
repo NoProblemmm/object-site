@@ -5,6 +5,7 @@ import { Input } from "@components/ui/input/Input";
 import { Button } from "@components/ui/button/Button";
 import { signInFormValidation, type TSignInSchema } from "./validations";
 import "./auth.css";
+import { Footer } from "@components/ui/footer/Footer";
 
 export const ResetPassword: React.FC = () => {
   const {
@@ -60,6 +61,7 @@ export const ResetPassword: React.FC = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

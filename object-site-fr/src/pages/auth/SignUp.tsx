@@ -7,6 +7,7 @@ import { Button } from "@components/ui/button/Button";
 import { signUpFormValidation, type TSignUpSchema } from "./validations";
 import type { ISignUpRequest } from "@api/data-details";
 import "./auth.css";
+import { Footer } from "@components/ui/footer/Footer";
 
 export const SignUp: React.FC = () => {
   const {
@@ -81,6 +82,7 @@ export const SignUp: React.FC = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
