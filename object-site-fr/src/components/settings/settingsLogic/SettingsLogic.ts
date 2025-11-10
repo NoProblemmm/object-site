@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { ThemeContext } from "@theme/ThemeContext";
+import { useContext, useState } from "react";
 
 export const SettingsLogic = () => {
   const [themeMenu, setThemeMenu] = useState(false);
   const [localesMenu, setLocalesMenu] = useState(false);
+  const { toggleTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const links = [
     {
@@ -13,10 +16,9 @@ export const SettingsLogic = () => {
       },
       sublinks: [
         {
-          name: "Dark",
-          callback: () => {},
+          name: theme.id === "dark_theme" ? "Light" : "Dark",
+          callback: toggleTheme,
         },
-        { name: "Light", callback: () => {} },
       ],
     },
     {

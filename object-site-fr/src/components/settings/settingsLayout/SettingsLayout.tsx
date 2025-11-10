@@ -15,11 +15,12 @@ export const SettingsLayout = () => {
             >
               <span>{item.name}</span>
             </div>
-            {item.sublinks.map((link) => (
+            {item.sublinks.map((link, index) => (
               <div
+                key={index}
                 className={`settingslayout__dropdown-menu ${item.state && "active"} `}
               >
-                <div className="settingslayout__menu">
+                <div className="settingslayout__menu" onClick={link.callback}>
                   <span>{link.name}</span>
                 </div>
               </div>
