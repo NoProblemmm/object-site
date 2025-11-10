@@ -34,3 +34,11 @@ body {
   font-family: "Montserrat", sans-serif;
   overflow-x: hidden;
 }
+
+.root_div {
+  background-image: var(--background);
+  background-size: 9000px;
+  color: var(--text);
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+}
