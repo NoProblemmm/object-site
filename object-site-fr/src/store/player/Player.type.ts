@@ -13,6 +13,7 @@ export interface IPlayerStore extends IPlayerState, IPlayerMethods {}
 
 export interface IPlayerState {
   isPlaying: boolean;
+  isShuffle: boolean;
   volume: number;
   trackIndex: number;
   myTrackIndex: number;
@@ -25,6 +26,8 @@ export interface IPlayerState {
 export interface IPlayerMethods {
   getTrackStore(): void;
   getMyTrack(): void;
+  toggleShuffleTrack(): void;
+  shuffleTrack(): void;
   searchTrack(volume: string): void;
   addMyTrack(volume: number): void;
   deleteMyTrack(volume: number): void;
