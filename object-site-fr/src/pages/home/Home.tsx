@@ -12,6 +12,9 @@ import "./Home.css";
 export const Home: React.FC = observer(() => {
   const links = [
     { name: "Welcome", link: "/welcome" },
+    ...(useSessionStore.isAutentificate
+      ? [{ name: "Profile", link: "/profile" }]
+      : []),
     { name: "Settings", link: "/settings" },
     {
       name: useSessionStore.isAutentificate ? "Exit" : "Sign In",
