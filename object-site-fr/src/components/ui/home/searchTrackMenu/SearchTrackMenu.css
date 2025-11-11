@@ -1,0 +1,29 @@
+.searchTrack_container {
+  width: 100%;
+  display: block;
+  height: 52rem;
+  padding: 15px;
+  overflow-y: scroll;
+}
+
+.search__input {
+  margin: 5px 10px 5px 10px;
+  width: 100%;
+  color: #ffffff;
+  border: none;
+  border-bottom: 1px solid var(--commonBorder);
+  background-color: rgba(240, 248, 255, 0);
+  height: 30px;
+  transition: all 0.5s;
+}
+
+.search__input:hover {
+  transform: scale(1.01);
+}
+
+.search__input:focus {
+  outline: 0;
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid var(--commonBorderActive);
+}
