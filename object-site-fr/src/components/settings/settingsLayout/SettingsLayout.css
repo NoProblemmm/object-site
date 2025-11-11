@@ -81,3 +81,15 @@
   background-color: var(--settingsSettingsItemBackgroundActive);
   border: 1px solid var(--settingsSettingsItemBorderActive);
 }
+
+@media screen and (max-width: 1000px) {
+  .settingslayout__card-container {
+    width: 95%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .settingslayout__card-container {
+    width: 40%;
+  }
+}

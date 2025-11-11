@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import { ThemeContext } from "@theme/ThemeContext";
 import { useContext, useState } from "react";
 
@@ -6,6 +7,7 @@ export const SettingsLogic = () => {
   const [localesMenu, setLocalesMenu] = useState(false);
   const { toggleTheme } = useContext(ThemeContext);
   const { theme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   const links = [
     {
@@ -34,6 +36,13 @@ export const SettingsLogic = () => {
         },
         { name: "English", callback: () => {} },
       ],
+    },
+    {
+      name: "Reset password",
+      state: localesMenu,
+      open: () => {
+        navigate({ to: "/auth/resetPassword" });
+      },
     },
   ];
   return { links };
