@@ -8,8 +8,16 @@ export const RightSider: React.FC = observer(() => {
   const [isSiderMenu, setIsSiderMenu] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
-  const hendalSearch = async () => {
+  const hendleSearch = async () => {
     await playerStore.searchTrack(inputValue);
+  };
+  const handleEnterSearch = async (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      await playerStore.searchTrack(inputValue);
+    }
   };
 
   return !isSiderMenu ? (
@@ -35,6 +43,7 @@ export const RightSider: React.FC = observer(() => {
         <div className="rightsider__input-container">
           <Input
             value={inputValue}
+            onKeyDown={handleEnterSearch}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Search track..."
             className="rightsider__input"
@@ -43,7 +52,7 @@ export const RightSider: React.FC = observer(() => {
             className="rightsider__search"
             src="/static/rightSider/search.svg"
             alt="Search"
-            onClick={() => hendalSearch()}
+            onClick={() => hendleSearch()}
           />
         </div>
       </div>

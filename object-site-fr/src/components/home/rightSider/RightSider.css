@@ -77,3 +77,15 @@
   transform: scale(1.1);
   filter: var(--svgItemsFilterActive);
 }
+
+@media screen and (max-width: 1000px) {
+  .sider__container {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .sider__container {
+    display: inline-flex;
+  }
+}
