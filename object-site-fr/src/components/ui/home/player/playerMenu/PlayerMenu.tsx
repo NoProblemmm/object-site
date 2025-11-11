@@ -4,16 +4,8 @@ import { observer } from "mobx-react-lite";
 import { useSessionStore } from "@store/session/Session.store";
 import "./PlayerMenu.css";
 export const PlayerMenu = observer(() => {
-  const { currentTrack } = PlayerLogic();
+  const { currentTrack, handleAddTrack, handleDeleteTrack } = PlayerLogic();
 
-  const handleAddTrack = async (trackId?: number) => {
-    if (!trackId) return console.log("Трек не найден");
-    await playerStore.addMyTrack(trackId);
-  };
-  const handleDeleteTrack = async (trackId?: number) => {
-    if (!trackId) return console.log("Трек не найден");
-    await playerStore.deleteMyTrack(trackId);
-  };
   return (
     <div className="menu__container">
       {useSessionStore.isAutentificate &&

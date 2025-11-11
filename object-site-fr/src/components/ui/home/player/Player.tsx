@@ -37,7 +37,6 @@ export const Player = observer(() => {
         onEnded={handleEnded}
         muted={isMute}
       />
-
       <div className="cover__container ">
         <div
           className={`cover img__container ${playerStore.isPlaying ? "cover__multi" : "img__static"}`}

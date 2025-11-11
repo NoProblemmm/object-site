@@ -160,6 +160,15 @@ export const PlayerLogic = () => {
     document.dispatchEvent(new CustomEvent("drag-end"));
   };
 
+  const handleAddTrack = async (trackId?: number) => {
+    if (!trackId) return console.log("Трек не найден");
+    await playerStore.addMyTrack(trackId);
+  };
+  const handleDeleteTrack = async (trackId?: number) => {
+    if (!trackId) return console.log("Трек не найден");
+    await playerStore.deleteMyTrack(trackId);
+  };
+
   return {
     audioRef,
     currentTime,
@@ -168,6 +177,8 @@ export const PlayerLogic = () => {
     playerStore,
     isMute,
     isValue,
+    handleAddTrack,
+    handleDeleteTrack,
     handleMouseDown,
     handleDragStart,
     handleDragEnd,

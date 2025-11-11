@@ -1,7 +1,7 @@
 import { playerStore } from "@store/player/Player.store";
 import { TrackList } from "@components/ui/trackList/TrackList";
-import "./MyTrackMenu.css";
 import { observer } from "mobx-react-lite";
+import "./MyTrackMenu.css";
 export const MyTrackMenu = observer(() => {
   return (
     <div className="myTrackMenu__container">

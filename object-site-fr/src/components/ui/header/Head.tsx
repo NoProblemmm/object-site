@@ -34,7 +34,12 @@ export const Header = observer(({ links, style }: TLink) => {
   return (
     <>
       <nav className="navigate ">
-        <span className={`navigate__logo ${style}`}>next track</span>
+        <span
+          className={`navigate__logo ${style}`}
+          onClick={() => navigate({ to: "/" })}
+        >
+          next track
+        </span>
         {useSessionStore.isAutentificate ? (
           <div className="navigate__profile-container">
             <div className={`navigate__profile-name ${style}`}>
