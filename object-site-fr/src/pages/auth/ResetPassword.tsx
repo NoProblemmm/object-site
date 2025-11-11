@@ -3,7 +3,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { Input } from "@components/ui/input/Input";
 import { Button } from "@components/ui/button/Button";
-import { signInFormValidation, type TSignInSchema } from "./validations";
+import {
+  resetPasswordFormValidation,
+  type TResetPasswordSchema,
+} from "./validations";
 import "./auth.css";
 import { Footer } from "@components/ui/footer/Footer";
 
@@ -13,7 +16,9 @@ export const ResetPassword: React.FC = () => {
     register,
     control,
     formState: { errors },
-  } = useForm<TSignInSchema>({ resolver: zodResolver(signInFormValidation) });
+  } = useForm<TResetPasswordSchema>({
+    resolver: zodResolver(resetPasswordFormValidation),
+  });
 
   const navigate = useNavigate();
 
@@ -43,8 +48,13 @@ export const ResetPassword: React.FC = () => {
             {errors.password && (
               <p className="form__error">{errors.password.message}</p>
             )}
+            <Input.Password
+              {...register("confirmPassword", { required: true })}
+              type="password"
+              placeholder="Confirm password"
+            ></Input.Password>
             <div className="form__button">
-              <Button htmlType="submit">Sign in</Button>
+              <Button htmlType="submit">Reset password</Button>
               <p
                 className="form__option"
                 onClick={() => navigate({ to: "/auth/signIn" })}
