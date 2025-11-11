@@ -7,7 +7,7 @@ import "./TrackList.css";
 
 type TProps = {
   item: ITrack;
-  search: boolean;
+  search?: boolean;
 };
 export const TrackList = React.memo(
   observer(({ item, search }: TProps) => {

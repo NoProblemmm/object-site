@@ -34,6 +34,12 @@ export const TabMenu = observer(() => {
         >
           My track
         </li>
+        <li
+          className="tabmenu__menu-items"
+          onClick={() => handleMenu("Search")}
+        >
+          Search
+        </li>
       </ul>
     </div>
   );

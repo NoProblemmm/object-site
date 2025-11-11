@@ -22,5 +22,17 @@ export const signUpFormValidation = z
     path: ["confirmPassword"],
   });
 
+export const resetPasswordFormValidation = z
+  .object({
+    email: emailValidation,
+    password: passwordValidation,
+    confirmPassword: passwordValidation,
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match!",
+    path: ["confirmPassword"],
+  });
+
 export type TSignUpSchema = z.infer<typeof signUpFormValidation>;
 export type TSignInSchema = z.infer<typeof signInFormValidation>;
+export type TResetPasswordSchema = z.infer<typeof resetPasswordFormValidation>;
