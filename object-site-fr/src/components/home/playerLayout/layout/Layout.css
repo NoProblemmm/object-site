@@ -12,3 +12,60 @@
   text-align: center;
   padding: 15vh 0 15vh 0;
 }
+
+.wind_btn {
+  display: flex;
+  cursor: pointer;
+  --angle: 0deg;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 0 40px 0 40px;
+  padding: 7px;
+  height: 40px;
+  border-bottom: 1px solid;
+  border-image: conic-gradient(
+      from var(--angle),
+      rgb(0, 214, 161),
+      rgb(0, 143, 95),
+      rgb(0, 255, 170),
+      rgb(0, 196, 245),
+      rgb(0, 228, 171),
+      rgb(0, 247, 255),
+      rgb(11, 161, 49)
+    )
+    1;
+
+  animation: 10s rotate linear infinite;
+  transition: all 0.1s;
+}
+.wind_btn:hover {
+  padding: 6px;
+  border-bottom: 2px solid;
+  --angle: 0deg;
+  border-image: conic-gradient(
+      from var(--angle),
+      rgb(0, 214, 161),
+      rgb(0, 143, 95),
+      rgb(0, 255, 170),
+      rgb(0, 196, 245),
+      rgb(0, 228, 171),
+      rgb(0, 247, 255),
+      rgb(11, 161, 49)
+    )
+    1;
+
+  animation: 10s rotate linear infinite;
+}
+
+@media screen and (max-width: 1000px) {
+  .wind_btn {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .wind_btn {
+    display: block;
+  }
+}

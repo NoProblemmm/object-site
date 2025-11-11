@@ -5,7 +5,9 @@ import { TabMenu } from "@components/ui/home/tabMenu/TabMenu";
 import { useSessionStore } from "@store/session/Session.store";
 import { MyTrackMenu } from "@components/ui/home/myTrackMenu/MyTrackMenu";
 import { playerStore } from "@store/player/Player.store";
+import { TrackState } from "@store/player/Player.type";
 import "./Layout.css";
+import { SearchTrackMenu } from "@components/ui/home/searchTrackMenu/SearchTrackMenu";
 
 export const Layout: React.FC = observer(() => {
   const handleResize = () => {
@@ -21,10 +23,25 @@ export const Layout: React.FC = observer(() => {
       <div className="container">
         {useSessionStore.isAutentificate && <TabMenu />}
         {playerStore.submenu === "MyTrack" && <MyTrackMenu />}
+        {playerStore.submenu === "Search" && <SearchTrackMenu />}
         {playerStore.submenu === "Player" && (
-          <div className="card__container">
-            <Player />
-          </div>
+          <>
+            {playerStore.currentTrackSource !== TrackState.Wind && (
+              <div
+                className="wind_btn"
+                onClick={() =>
+                  playerStore.playTrack(
+                    Math.floor(Math.random() * playerStore.tracks.length)
+                  )
+                }
+              >
+                Feel the wind
+              </div>
+            )}
+            <div className="card__container">
+              <Player />
+            </div>
+          </>
         )}
       </div>
     </>
