@@ -1,18 +1,13 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { type PropsWithChildren, useState } from "react";
 import { DARK_THEME, DARK_THEME_ID } from "./variants/dark";
 import { ThemeContext } from "./ThemeContext";
 import type { ITheme, IThemeContext } from "./ThemeTypes";
 import { LIGHT_THEME, LIGHT_THEME_ID } from "./variants/light";
 
-const THEMES: { [key in string]: ITheme } = {
-  [LIGHT_THEME_ID]: DARK_THEME,
-  [DARK_THEME_ID]: LIGHT_THEME,
-};
-
 export const ThemeProvider = React.memo<PropsWithChildren>((props) => {
   const [theme, setTheme] = useState<ITheme>(
-    localStorage.getItem("theme") === DARK_THEME_ID ? DARK_THEME : LIGHT_THEME
+    localStorage.getItem("theme") === DARK_THEME_ID ? DARK_THEME : DARK_THEME
   );
 
   const toggleTheme = useCallback(() => {
