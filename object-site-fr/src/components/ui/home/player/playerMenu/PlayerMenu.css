@@ -18,6 +18,7 @@
 }
 
 .add__item {
+  transform: scale(90%);
   filter: var(--svgItemsFilter);
 }
 
@@ -31,6 +32,7 @@
 }
 .mix__item {
   filter: var(--svgItemsFilter);
+  transform: scale(90%);
   transition: all 0.5s;
 }
 

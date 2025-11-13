@@ -231,3 +231,22 @@
       2px 2px 5px 5px hsl(0, 100%, 50%);
   }
 }
+
+.track__tebmenu {
+  width: 100%;
+  padding: 0 70px 0 70px;
+  height: 35px;
+  margin-bottom: 15px;
+}
+
+.chat__image {
+  float: right;
+  width: 40px;
+  opacity: 1;
+  cursor: pointer;
+  transition: all 0.3s;
+  filter: var(--svgItemsFilter);
+}
+.chat__image:hover {
+  transform: scale(1.1);
+}

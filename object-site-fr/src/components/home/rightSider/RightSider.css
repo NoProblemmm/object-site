@@ -45,7 +45,7 @@
 .rightsider__input {
   margin: 5px 5px 0 0;
   width: 100%;
-  color: #ffffff;
+  color: var(--text);
   border: none;
   border-bottom: 1px solid var(--commonBorder);
   background-color: rgba(240, 248, 255, 0);
