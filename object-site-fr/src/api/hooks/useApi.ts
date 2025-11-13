@@ -1,10 +1,11 @@
+import { BASE_URL } from "@api/Api.service";
 import axios from "axios";
 
 class ApiRequest {
   error: String | null = null;
 
   api = axios.create({
-    baseURL: `http://localhost:5000/`,
+    baseURL: `${BASE_URL}`,
     headers: {
       "Content-Type": "application/json",
     },
@@ -12,7 +13,7 @@ class ApiRequest {
 
   constructor() {
     this.api = axios.create({
-      baseURL: "http://localhost:5000/",
+      baseURL: `${BASE_URL}`,
       headers: {
         "Content-Type": "application/json",
       },
