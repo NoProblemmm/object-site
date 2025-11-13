@@ -1,7 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { PlayerLogic } from "./hooks/PlayerLogic";
-import "./Player.css";
 import { PlayerMenu } from "./playerMenu/PlayerMenu";
+import { TrackChat } from "../trackChat/TrackChat";
+import "./Player.css";
+import { useRef } from "react";
+import { useClickOutside } from "../../../../hooks/useClickOutside";
 
 export const Player = observer(() => {
   const {
@@ -12,6 +15,7 @@ export const Player = observer(() => {
     playerStore,
     isMute,
     isValue,
+    openChat,
     handleMouseDown,
     handleEnded,
     handleMouseMove,
@@ -24,6 +28,7 @@ export const Player = observer(() => {
     setIsValue,
     setIsMute,
     handleDragEnd,
+    handleOpenChat,
   } = PlayerLogic();
 
   if (!currentTrack) {
@@ -55,44 +60,54 @@ export const Player = observer(() => {
         <h3 className="title">{currentTrack.name}</h3>
         <p className="subTitle">{currentTrack.author}</p>
       </div>
-
-      <div className="progress-container">
-        <div className="time-display__start">
-          {Math.floor(currentTime / 60)
-            .toString()
-            .padStart(2, "0")}
-          :
-          {Math.floor(currentTime % 60)
-            .toString()
-            .padStart(2, "0")}
-        </div>
-        <div className="time-display__end">
-          {Math.floor(duration / 60)
-            .toString()
-            .padStart(2, "0")}
-          :
-          {Math.floor(duration % 60)
-            .toString()
-            .padStart(2, "0")}
-        </div>
-        <div
-          className="slider-wrapper"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-        >
-          <input
-            type="range"
-            min={0}
-            max={Number.isFinite(duration) ? duration : 0}
-            value={currentTime}
-            onChange={handleProgressChange}
-            onMouseDown={handleSeekMouseDown}
-            onMouseUp={handleSeekMouseUp}
-            className="progress-slider"
-          />
-        </div>
+      <div className="track__tebmenu ">
+        <img
+          className="chat__image"
+          src="/static/player/chat.svg"
+          alt="Chat img"
+          onClick={() => handleOpenChat()}
+        />
       </div>
+      {openChat && <TrackChat currentTrack={currentTrack} />}
+      <>
+        <div className="progress-container">
+          <div className="time-display__start">
+            {Math.floor(currentTime / 60)
+              .toString()
+              .padStart(2, "0")}
+            :
+            {Math.floor(currentTime % 60)
+              .toString()
+              .padStart(2, "0")}
+          </div>
+          <div className="time-display__end">
+            {Math.floor(duration / 60)
+              .toString()
+              .padStart(2, "0")}
+            :
+            {Math.floor(duration % 60)
+              .toString()
+              .padStart(2, "0")}
+          </div>
+          <div
+            className="slider-wrapper"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+          >
+            <input
+              type="range"
+              min={0}
+              max={Number.isFinite(duration) ? duration : 0}
+              value={currentTime}
+              onChange={handleProgressChange}
+              onMouseDown={handleSeekMouseDown}
+              onMouseUp={handleSeekMouseUp}
+              className="progress-slider"
+            />
+          </div>
+        </div>
+      </>
       <PlayerMenu />
       <div className="volume-container">
         <img

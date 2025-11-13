@@ -23,6 +23,7 @@ export const PlayerLogic = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [isValue, setIsValue] = useState(false);
   const [isMute, setIsMute] = useState(false);
+  const [openChat, setOpenChat] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -169,6 +170,10 @@ export const PlayerLogic = () => {
     await playerStore.deleteMyTrack(trackId);
   };
 
+  const handleOpenChat = () => {
+    setOpenChat(!openChat);
+  };
+
   return {
     audioRef,
     currentTime,
@@ -177,6 +182,7 @@ export const PlayerLogic = () => {
     playerStore,
     isMute,
     isValue,
+    openChat,
     handleAddTrack,
     handleDeleteTrack,
     handleMouseDown,
@@ -192,5 +198,6 @@ export const PlayerLogic = () => {
     handleVolumeChange,
     handleSeekMouseDown,
     handleSeekMouseUp,
+    handleOpenChat,
   };
 };
