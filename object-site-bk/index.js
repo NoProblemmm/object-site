@@ -1,4 +1,10 @@
 import express from "express";
+import cors from "cors";
+import { createServer } from "node:http";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+import { authenticateJWT } from "./src/common/token/Token.js";
+import { socketLogic } from "./src/service/socket.js";
 import {
   signIn,
   signUp,
@@ -10,17 +16,15 @@ import {
   deleteMyTrack,
   getMyProfile,
 } from "./src/path/path.js";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
-import { authenticateJWT } from "./src/common/token/Token.js";
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
+const server = createServer(app);
 
 app.use(
   cors({
-    origin: `http://localhost:5173`,
+    origin: `${process.env.BASE_CORS_URL}`,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -33,6 +37,9 @@ app.use(
   express.static("media/imageTrack/"),
   express.static("media/profileImage/")
 );
+
+// Socket
+socketLogic(server);
 
 // POST
 app.post("/signIn", (req, res) => {
@@ -73,4 +80,4 @@ app.delete("/delete-mytrack", authenticateJWT, (req, res) => {
   deleteMyTrack(req, res);
 });
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
