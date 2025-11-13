@@ -1,0 +1,53 @@
+.profile__container {
+  display: flex;
+  width: 100%;
+  height: 52rem;
+}
+
+.profile__left {
+  display: block;
+  text-align: center;
+  width: 40%;
+  height: 100%;
+}
+
+.profile__img {
+  margin-top: 90px;
+  border-radius: 7px;
+  max-width: 25rem;
+  cursor: pointer;
+  max-height: 25rem;
+  transition: all 0.5s;
+  z-index: 1;
+  margin-bottom: 20px;
+}
+
+.profile__img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.profile__name {
+  display: block;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.profile__name:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+.profile__right {
+  display: block;
+  padding-top: 90px;
+  width: 60%;
+  height: 100%;
+  border-left: 1px solid var(--text);
+}
+
+.profile__span-mytrack {
+  display: block;
+  margin: 0 0 10px 30px;
+}
