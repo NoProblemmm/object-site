@@ -23,7 +23,8 @@
       "@api/*": ["./src/api/*"],
       "@common/*": ["./src/common/*"],
       "@theme/*": ["./src/theme/*"],
-      "@locales/*": ["./src/locales/*"]
+      "@locales/*": ["./src/locales/*"],
+      "@service/*": ["./src/service/*"]
     },
     /* Linting */
     "strict": true,

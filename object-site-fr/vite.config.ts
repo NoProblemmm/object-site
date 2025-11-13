@@ -21,6 +21,7 @@ export default defineConfig({
       "@common": path.resolve(__dirname, "src/common/"),
       "@theme": path.resolve(__dirname, "src/theme/"),
       "@locales": path.resolve(__dirname, "src/locales/"),
+      "@service": path.resolve(__dirname, "src/service/"),
     },
   },
 });
