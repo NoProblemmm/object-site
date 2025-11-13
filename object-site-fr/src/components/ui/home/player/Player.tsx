@@ -3,8 +3,6 @@ import { PlayerLogic } from "./hooks/PlayerLogic";
 import { PlayerMenu } from "./playerMenu/PlayerMenu";
 import { TrackChat } from "../trackChat/TrackChat";
 import "./Player.css";
-import { useRef } from "react";
-import { useClickOutside } from "../../../../hooks/useClickOutside";
 
 export const Player = observer(() => {
   const {
