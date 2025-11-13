@@ -9,7 +9,7 @@
   opacity: 0.98;
   background-color: var(--headerDropMenuBackground);
   padding: 10px;
-  z-index: 20;
+  z-index: 1;
 }
 .chat__items-container {
   width: 100%;
