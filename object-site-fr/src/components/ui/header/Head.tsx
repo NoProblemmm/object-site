@@ -42,7 +42,9 @@ export const Header = observer(({ links, style }: TLink) => {
         </span>
         {useSessionStore.isAutentificate ? (
           <div className="navigate__profile-container">
-            <div className={`navigate__profile-name ${style}`}>
+            <div
+              className={`navigate__profile-name ${style} ${useProfileStore.user?.admin && "navigate__name-prefix"}`}
+            >
               {useProfileStore.user?.name}
             </div>
             <div
