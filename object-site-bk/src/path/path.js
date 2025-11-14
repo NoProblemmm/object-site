@@ -37,7 +37,10 @@ export const signUp = async (req, res) => {
         id: User.length + 1,
         name: name,
         email: email,
+        isAuthor: false,
         password: hashedPassword,
+        admin: false,
+        requestComposer: false,
       });
       res.json({ success: true });
     } else {
@@ -82,6 +85,7 @@ export const track = (req, res) => {
       author: track.author,
       image: track.image,
       url: track.url,
+      isAuthor: track.isAuthor,
     }));
 
     return res.json(tracks);
@@ -192,8 +196,50 @@ export const getMyProfile = (req, res) => {
       image: user.image,
       name: user.name,
       email: user.email,
+      isAuthor: user.isAuthor,
+      admin: user.admin,
+      requestComposer: user.requestComposer,
     });
   } catch {
     res.status(401).json({ message: "Error server." });
   }
+};
+
+// Запрос на композитора
+export const requestComposerUser = (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      res.status(404).json({ message: "The user was not found" });
+    }
+    const user = User.find((user) => user.id === userId);
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+    }
+    user.requestComposer = !user.requestComposer;
+    res.status(200).json({
+      message: "The track was successfully deleted from favorites.",
+    });
+  } catch {
+    res.status(401).json({ message: "Error server." });
+  }
+};
+
+//!!! Смена img профиля User (Нужна бд...)
+export const setAvatarUser = (req, res) => {
+  try {
+    const userId = req.user.userId.id;
+
+    if (!userId) {
+      res.status(404).json({ message: "User not found" });
+    }
+    const user = User.find((user) => user.id === userId);
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({
+      message: "!! Let's pretend that we've changed :))))))) !!",
+    });
+  } catch {}
 };
