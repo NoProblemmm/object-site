@@ -104,6 +104,29 @@ export const Api = () => {
     });
     return response;
   };
+
+  // Запрос на композитора
+  const requestComposerUser = (userId: number) => {
+    const token = useApiTokenProvider.accessToken;
+    const response = POST(
+      "requestComposeUser",
+      { userId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  };
+
+  //!!! Изменение аватарки User (Не рабочий нужна DB)
+  const setAvatarUser = (file: any) => {
+    const token = useApiTokenProvider.accessToken;
+    const response = POST(
+      "setAvatarUser",
+      { file },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return response;
+  };
+
   return {
     signIn,
     signUp,
@@ -114,5 +137,7 @@ export const Api = () => {
     addMyTrack,
     deleteMyTrack,
     getMyProfile,
+    requestComposerUser,
+    setAvatarUser,
   };
 };

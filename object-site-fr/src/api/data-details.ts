@@ -3,7 +3,10 @@ export type IUserInfo = {
   name: string;
   image?: string;
   email: string;
+  isAuthor: boolean;
   password: string;
+  admin: boolean;
+  requestComposer: boolean;
 };
 
 export interface ISignInRequest {
