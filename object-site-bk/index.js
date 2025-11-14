@@ -15,6 +15,8 @@ import {
   addMyTrack,
   deleteMyTrack,
   getMyProfile,
+  requestComposerUser,
+  setAvatarUser,
 } from "./src/path/path.js";
 
 dotenv.config();
@@ -56,6 +58,14 @@ app.post("/refresh-token", (req, res) => {
 
 app.post("/add-mytrack", authenticateJWT, (req, res) => {
   addMyTrack(req, res);
+});
+
+app.post("/requestComposeUser", authenticateJWT, (req, res) => {
+  requestComposerUser(req, res);
+});
+
+app.post("/setAvatarUser", authenticateJWT, (res, req) => {
+  setAvatarUser(req, res);
 });
 
 // GET
