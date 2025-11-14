@@ -1,5 +1,5 @@
 .chatitems__container {
-  width: 100%;
+  max-width: 100%;
   display: flex;
   margin-bottom: 5px;
 }
@@ -16,6 +16,11 @@
   border-radius: 10px;
 }
 
+.chatitems__message {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}
 .chatitems__container-message {
   width: 100%;
   text-align: left;

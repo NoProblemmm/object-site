@@ -18,7 +18,6 @@ class ProfileStore implements TProfileStore {
     this.dataHolder.clear();
   };
   getProfile = async () => {
-    this.dataHolder.setLoading();
     const response = await Api().getMyProfile();
     if (response.error) {
       this.dataHolder.setError(response.error.message);
@@ -27,6 +26,29 @@ class ProfileStore implements TProfileStore {
       return response;
     }
     return undefined;
+  };
+
+  requestCompose = async () => {
+    const userId = Number(this.user?.id);
+    if (!userId) {
+      return console.log("User not define");
+    } else {
+      const response = await Api().requestComposerUser(userId);
+      if (response) {
+        return response;
+      } else {
+        console.log("Server error");
+      }
+    }
+  };
+
+  setImageUser = async (file: any) => {
+    const response = await Api().setAvatarUser(file);
+    if (response) {
+      return response;
+    } else {
+      console.log("Server error");
+    }
   };
 }
 
