@@ -8,12 +8,13 @@ import { signUpFormValidation, type TSignUpSchema } from "./validations";
 import type { ISignUpRequest } from "@api/data-details";
 import "./auth.css";
 import { Footer } from "@components/ui/footer/Footer";
+import { useState } from "react";
 
 export const SignUp: React.FC = () => {
+  const [isPassword, setIsPassword] = useState(true);
   const {
     handleSubmit,
     register,
-    control,
     formState: { errors },
   } = useForm<TSignUpSchema>({ resolver: zodResolver(signUpFormValidation) });
 
@@ -47,11 +48,19 @@ export const SignUp: React.FC = () => {
             {errors.email && (
               <p className="form__error">{errors.email.message}</p>
             )}
-            <Input.Password
-              {...register("password", { required: true })}
-              type="password"
-              placeholder="Password"
-            ></Input.Password>
+            <div className="password_container">
+              <Input.Password
+                {...register("password", { required: true })}
+                type={isPassword ? "password" : "text"}
+                placeholder="Password"
+              ></Input.Password>
+              <img
+                src="/static/eye.svg"
+                alt=""
+                className={`eye__password ${!isPassword && "active"}`}
+                onClick={() => setIsPassword(!isPassword)}
+              />
+            </div>
             {errors.password && (
               <p className="form__error">{errors.password.message}</p>
             )}
