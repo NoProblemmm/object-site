@@ -11,7 +11,7 @@ const _Input: TInput = ({ ...prop }) => {
 };
 
 const _Password: TInput = ({ ...prop }) => {
-  return <input className="input__style" type="password" {...prop} />;
+  return <input className="input__style " type="password" {...prop} />;
 };
 
 const _File: TInput = ({ ...prop }) => {

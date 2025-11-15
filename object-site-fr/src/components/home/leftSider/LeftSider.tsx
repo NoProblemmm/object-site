@@ -7,7 +7,6 @@ import "./LeftSider.css";
 export const LeftSider: React.FC = observer(() => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [duration, setDuration] = useState(0);
-  const [trackMenu, setTrackMenu] = useState<number | undefined>();
   const [isHighlighted, setHighlighted] = useState(false);
 
   useEffect(() => {
