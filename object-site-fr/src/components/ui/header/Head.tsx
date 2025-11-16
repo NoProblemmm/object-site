@@ -1,10 +1,10 @@
-import { LoadingStyles } from "./scripts/LoadingStyles";
+import { observer } from "mobx-react-lite";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useSessionStore } from "@store/session/Session.store";
-import { useClickOutside } from "../../../hooks/useClickOutside";
 import { useProfileStore } from "@store/profile/Profile.store";
-import { observer } from "mobx-react-lite";
+import { useClickOutside } from "../../../hooks/useClickOutside";
+import { LoadingStyles } from "./scripts/LoadingStyles";
 import "./Head.css";
 
 interface ILink {

@@ -1,14 +1,14 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@components/ui/button/Button";
 import { Input } from "@components/ui/input/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { useSessionStore } from "@store/session/Session.store";
-import { signInFormValidation, type TSignInSchema } from "./validations";
-import type { ISignInRequest } from "@api/data-details";
 import { Footer } from "@components/ui/footer/Footer";
+import type { ISignInRequest } from "@api/data-details";
+import { signInFormValidation, type TSignInSchema } from "./validations";
 import "./auth.css";
-import { useState } from "react";
 
 export const SignIn: React.FC = () => {
   const [isPassword, setIsPassword] = useState(true);

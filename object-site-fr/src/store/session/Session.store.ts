@@ -1,11 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import { DataHolder } from "@force-dev/utils";
 import { Api } from "@api/Api";
-import type { TSessionStore } from "./Session.type";
-import type { ISignInRequest, ISignInResponse } from "@api/data-details";
-import { ApiTokenProvider, useApiTokenProvider } from "@api/ApiToken.provider";
 import { useProfileStore } from "@store/profile/Profile.store";
+import { ApiTokenProvider, useApiTokenProvider } from "@api/ApiToken.provider";
 import { playerStore } from "@store/player/Player.store";
+import type { ISignInRequest, ISignInResponse } from "@api/data-details";
+import type { TSessionStore } from "./Session.type";
 
 class SessionStore implements TSessionStore {
   public dataHolder = new DataHolder<string | null>(null);

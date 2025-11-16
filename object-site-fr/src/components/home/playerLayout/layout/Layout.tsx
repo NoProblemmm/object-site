@@ -6,8 +6,8 @@ import { useSessionStore } from "@store/session/Session.store";
 import { MyTrackMenu } from "@components/ui/home/myTrackMenu/MyTrackMenu";
 import { playerStore } from "@store/player/Player.store";
 import { TrackState } from "@store/player/Player.type";
-import "./Layout.css";
 import { SearchTrackMenu } from "@components/ui/home/searchTrackMenu/SearchTrackMenu";
+import "./Layout.css";
 
 export const Layout: React.FC = observer(() => {
   const handleResize = () => {

@@ -1,15 +1,15 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { Input } from "@components/ui/input/Input";
 import { Button } from "@components/ui/button/Button";
+import { Footer } from "@components/ui/footer/Footer";
 import {
   resetPasswordFormValidation,
   type TResetPasswordSchema,
 } from "./validations";
 import "./auth.css";
-import { Footer } from "@components/ui/footer/Footer";
-import { useState } from "react";
 
 export const ResetPassword: React.FC = () => {
   const [isPassword, setIsPassword] = useState(true);

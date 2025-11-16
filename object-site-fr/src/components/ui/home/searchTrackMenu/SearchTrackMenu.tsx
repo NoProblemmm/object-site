@@ -1,9 +1,9 @@
+import { useState } from "react";
+import { observer } from "mobx-react-lite";
 import { playerStore } from "@store/player/Player.store";
 import { TrackList } from "@components/ui/trackList/TrackList";
-import { observer } from "mobx-react-lite";
-import "./SearchTrackMenu.css";
 import { Input } from "@components/ui/input/Input";
-import { useState } from "react";
+import "./SearchTrackMenu.css";
 export const SearchTrackMenu = observer(() => {
   const [inputValue, setInputValue] = useState("");
 

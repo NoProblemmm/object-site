@@ -1,8 +1,8 @@
-import type { IUserInfo } from "@api/data-details";
 import { makeAutoObservable } from "mobx";
-import { type TProfileStore } from "./Profile.type";
-import { DataHolder } from "@force-dev/utils";
 import { Api } from "@api/Api";
+import { DataHolder } from "@force-dev/utils";
+import type { IUserInfo } from "@api/data-details";
+import { type TProfileStore } from "./Profile.type";
 
 class ProfileStore implements TProfileStore {
   public dataHolder = new DataHolder<IUserInfo>();

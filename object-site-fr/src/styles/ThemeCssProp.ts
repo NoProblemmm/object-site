@@ -1,6 +1,5 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, type CSSProperties } from "react";
 import { ThemeContext } from "@theme/ThemeContext";
-import type { CSSProperties } from "react";
 
 const useThemeStyle = () => {
   const { theme } = useContext(ThemeContext);

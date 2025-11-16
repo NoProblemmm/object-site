@@ -1,8 +1,7 @@
-import React from "react";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { observer } from "mobx-react-lite";
 import { playerStore } from "@store/player/Player.store";
 import type { ITrack } from "@store/player/Player.type";
-import { observer } from "mobx-react-lite";
 import "./TrackList.css";
 
 type TProps = {

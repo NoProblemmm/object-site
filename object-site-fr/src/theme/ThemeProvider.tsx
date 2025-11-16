@@ -1,9 +1,13 @@
-import React, { useCallback, useMemo } from "react";
-import { type PropsWithChildren, useState } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useState,
+  type PropsWithChildren,
+} from "react";
 import { DARK_THEME, DARK_THEME_ID } from "./variants/dark";
 import { ThemeContext } from "./ThemeContext";
-import type { ITheme, IThemeContext } from "./ThemeTypes";
 import { LIGHT_THEME, LIGHT_THEME_ID } from "./variants/light";
+import type { ITheme, IThemeContext } from "./ThemeTypes";
 
 export const ThemeProvider = React.memo<PropsWithChildren>((props) => {
   const [theme, setTheme] = useState<ITheme>(

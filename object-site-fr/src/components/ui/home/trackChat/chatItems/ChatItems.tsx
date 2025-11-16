@@ -1,6 +1,6 @@
 import { useProfileStore } from "@store/profile/Profile.store";
-import "./ChatItems.css";
 import type { IMessageType } from "../TrackChat";
+import "./ChatItems.css";
 
 type Props = {
   myMessage: boolean;

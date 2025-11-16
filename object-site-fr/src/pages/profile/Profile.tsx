@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import { Header } from "@components/ui/header/Head";
 import { ProfileLayout } from "@components/profile/ProfileLayout";
 import { useSessionStore } from "@store/session/Session.store";
-import { useEffect } from "react";
 import "./Profile.css";
 
 export const Profile = () => {

@@ -4,8 +4,8 @@ import { TrackList } from "@components/ui/trackList/TrackList";
 import { playerStore } from "@store/player/Player.store";
 import { observer } from "mobx-react-lite";
 import { Button } from "@components/ui/button/Button";
-import "./ProfileLayout.css";
 import { useRef } from "react";
+import "./ProfileLayout.css";
 
 export const ProfileLayout = observer(() => {
   const avatarRef = useRef<HTMLInputElement | null>(null);

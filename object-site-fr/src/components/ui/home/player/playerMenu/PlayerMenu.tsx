@@ -1,7 +1,7 @@
-import { playerStore } from "@store/player/Player.store";
-import { PlayerLogic } from "../hooks/PlayerLogic";
 import { observer } from "mobx-react-lite";
+import { playerStore } from "@store/player/Player.store";
 import { useSessionStore } from "@store/session/Session.store";
+import { PlayerLogic } from "../hooks/PlayerLogic";
 import "./PlayerMenu.css";
 export const PlayerMenu = observer(() => {
   const { currentTrack, handleAddTrack, handleDeleteTrack } = PlayerLogic();

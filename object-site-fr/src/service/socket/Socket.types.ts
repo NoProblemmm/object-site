@@ -1,5 +1,5 @@
-import type { IUserInfo } from "@api/data-details";
 import { Socket as SocketIO } from "socket.io-client";
+import type { IUserInfo } from "@api/data-details";
 
 export type TSocket = SocketIO;
 

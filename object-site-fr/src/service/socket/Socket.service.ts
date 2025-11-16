@@ -1,6 +1,6 @@
+import { io } from "socket.io-client";
 import { SOCKET_URL } from "@api/Api.service";
 import { useApiTokenProvider } from "@api/ApiToken.provider";
-import { io } from "socket.io-client";
 import type { ISocketService, TSocket } from "./Socket.types";
 import type { IUserInfo } from "@api/data-details";
 

@@ -1,6 +1,6 @@
+import { useContext, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { ThemeContext } from "@theme/ThemeContext";
-import { useContext, useState } from "react";
 
 export const SettingsLogic = () => {
   const [themeMenu, setThemeMenu] = useState(false);

@@ -1,11 +1,11 @@
-import { Input } from "@components/ui/input/Input";
-import { ChatItems } from "./chatItems/ChatItems";
 import { useEffect, useState } from "react";
-import type { ITrack } from "@store/player/Player.type";
+import { Input } from "@components/ui/input/Input";
 import { useProfileStore } from "@store/profile/Profile.store";
-import type { IUserInfo } from "@api/data-details";
 import { socketService } from "@service/socket/Socket.service";
 import { useSessionStore } from "@store/session/Session.store";
+import type { ITrack } from "@store/player/Player.type";
+import type { IUserInfo } from "@api/data-details";
+import { ChatItems } from "./chatItems/ChatItems";
 import "./TrackChat.css";
 
 export interface IMessageType {
