@@ -26,6 +26,10 @@
   background-color: var(--settingsSettingsItemBackground);
   transition: all 0.5s;
   z-index: auto;
+  margin-bottom: 5px;
+}
+.settingslayout__card.active {
+  margin-bottom: 0px;
 }
 
 .settingslayout__card:hover {
@@ -45,7 +49,6 @@
   background-color: var(--settingsSettingsItemBackground);
   transform: translateY(-85px);
   transition: all 0.5s;
-  padding: 3px;
 }
 
 .settingslayout__dropdown-menu.active {
@@ -58,8 +61,10 @@
   opacity: 1;
   align-items: center;
   transform: translateY(2px);
+  padding: 3px;
   margin-bottom: 5px;
 }
+
 .settingslayout__dropdown-menu:hover {
   background-color: var(--settingsSettingsItemBackgroundActive);
   border: 1px solid var(--settingsSettingsItemBorderActive);

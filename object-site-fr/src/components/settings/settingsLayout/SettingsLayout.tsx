@@ -10,7 +10,7 @@ export const SettingsLayout = () => {
           <>
             <div
               key={index}
-              className="settingslayout__card"
+              className={`settingslayout__card ${item.state && "active"}`}
               onClick={item.open}
             >
               <span>{item.name}</span>
