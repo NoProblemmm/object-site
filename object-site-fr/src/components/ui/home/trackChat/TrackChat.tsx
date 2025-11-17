@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@components/ui/input/Input";
 import { useProfileStore } from "@store/profile/Profile.store";
 import { socketService } from "@service/socket/Socket.service";
@@ -14,6 +14,7 @@ type Props = {
 };
 
 export const TrackChat = observer(({ currentTrack }: Props) => {
+  const chatRef = useRef<HTMLDivElement>(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -29,6 +30,13 @@ export const TrackChat = observer(({ currentTrack }: Props) => {
       socketService.removeListeners();
     };
   }, [currentTrack]);
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop =
+        chatRef.current.scrollHeight - chatRef.current.clientHeight;
+    }
+  }, [playerStore.trackMessages]);
 
   const handleSendMessage = () => {
     if (currentTrack && message.trim() !== "") {
@@ -57,7 +65,7 @@ export const TrackChat = observer(({ currentTrack }: Props) => {
 
   return (
     <div className="chat__container">
-      <div className="chat__items-container">
+      <div className="chat__items-container" ref={chatRef}>
         {playerStore.trackMessages.map((item, index) => (
           <ChatItems
             key={index}
