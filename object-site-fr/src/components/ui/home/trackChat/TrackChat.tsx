@@ -3,27 +3,22 @@ import { Input } from "@components/ui/input/Input";
 import { useProfileStore } from "@store/profile/Profile.store";
 import { socketService } from "@service/socket/Socket.service";
 import { useSessionStore } from "@store/session/Session.store";
-import type { ITrack } from "@store/player/Player.type";
-import type { IUserInfo } from "@api/data-details";
+import type { IMessageType, ITrack } from "@store/player/Player.type";
 import { ChatItems } from "./chatItems/ChatItems";
 import "./TrackChat.css";
-
-export interface IMessageType {
-  sender: IUserInfo;
-  message: string;
-}
+import { playerStore } from "@store/player/Player.store";
+import { observer } from "mobx-react-lite";
 
 type Props = {
   currentTrack: ITrack | null;
 };
 
-export const TrackChat = ({ currentTrack }: Props) => {
+export const TrackChat = observer(({ currentTrack }: Props) => {
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<IMessageType[]>([]);
 
   useEffect(() => {
     const updateMessages = (newMessage: IMessageType) => {
-      setMessages((prev) => [...prev, newMessage]);
+      playerStore.trackMessages = [...playerStore.trackMessages, newMessage];
     };
     if (currentTrack) {
       socketService.joinRoom(currentTrack.id);
@@ -63,7 +58,7 @@ export const TrackChat = ({ currentTrack }: Props) => {
   return (
     <div className="chat__container">
       <div className="chat__items-container">
-        {messages.map((item, index) => (
+        {playerStore.trackMessages.map((item, index) => (
           <ChatItems
             key={index}
             myMessage={item.sender.name === useProfileStore.user?.name}
@@ -93,4 +88,4 @@ export const TrackChat = ({ currentTrack }: Props) => {
       )}
     </div>
   );
-};
+});

@@ -1,4 +1,11 @@
+import type { IUserInfo } from "@api/data-details";
+
 export interface IPlayerStates extends IPlayerState, IPlayerMethods {}
+
+export interface IMessageType {
+  sender: IUserInfo;
+  message: string;
+}
 
 export interface ITrack {
   id: number;

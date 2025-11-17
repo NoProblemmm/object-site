@@ -1,6 +1,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { Api } from "@api/Api";
-import { TrackState, type IPlayerStore, type ITrack } from "./Player.type";
+import {
+  TrackState,
+  type IPlayerStore,
+  type ITrack,
+  type IMessageType,
+} from "./Player.type";
 
 export class PlayerStore implements IPlayerStore {
   submenu = "Player";
@@ -15,6 +20,7 @@ export class PlayerStore implements IPlayerStore {
   myTracks: ITrack[] = [];
   searchTracks: ITrack[] = [];
   shuffleTracks: ITrack[] = [];
+  trackMessages: IMessageType[] = [];
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -164,6 +170,7 @@ export class PlayerStore implements IPlayerStore {
           break;
       }
     }
+    this.trackMessages = [];
   }
 
   previousTrack() {
