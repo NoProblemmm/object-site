@@ -28,7 +28,7 @@ export const Track = [
   {
     id: 1,
     name: "Track 1",
-    author: "NoNmae",
+    author: "Gold",
     time: "02:49",
     image: `${process.env.BASE_URL}/media/track-1.jpg`,
     url: `${process.env.BASE_URL}/media/track-1.mp3`,
@@ -37,7 +37,7 @@ export const Track = [
   {
     id: 2,
     name: "Track 2",
-    author: "NoNmae 2",
+    author: "Gold",
     time: "02:06",
     image: `${process.env.BASE_URL}/media/track-2.jpg`,
     url: `${process.env.BASE_URL}/media/track-2.mp3`,

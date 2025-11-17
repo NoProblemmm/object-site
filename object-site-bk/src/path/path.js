@@ -120,8 +120,10 @@ export const searchTrack = (req, res) => {
       return res.status(400).json({ message: "Search is missing" });
     }
 
-    const results = Track.filter((track) =>
-      track.name.toLowerCase().includes(name.toLowerCase())
+    const results = Track.filter(
+      (track) =>
+        track.name.toLowerCase().includes(name.toLowerCase()) ||
+        track.author.toLowerCase().includes(name.toLowerCase())
     );
 
     return res.json(results);
