@@ -1,0 +1,41 @@
+.group {
+  position: relative;
+  display: inline-flex;
+}
+
+.group span {
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.2s ease-out;
+  position: absolute;
+  top: -20%;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  border-radius: 4px;
+  background-color: #2d3748;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.5em;
+  padding: 6px 12px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  z-index: 10;
+}
+
+.group:hover span {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.group span::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 420%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background-color: inherit;
+}
