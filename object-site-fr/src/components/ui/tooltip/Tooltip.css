@@ -1,41 +1,89 @@
-.group {
-  position: relative;
-  display: inline-flex;
-}
-
-.group span {
-  visibility: hidden;
+.tooltip-trigger .tooltip {
   opacity: 0;
-  transform: scale(0);
-  transition: all 0.2s ease-out;
-  position: absolute;
-  top: -20%;
-  left: 0;
-  right: 0;
-  white-space: nowrap;
-  border-radius: 4px;
-  background-color: #2d3748;
-  color: #ffffff;
-  font-size: 12px;
-  line-height: 1.5em;
-  padding: 6px 12px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-  z-index: 10;
 }
 
-.group:hover span {
-  visibility: visible;
+.tooltip-trigger:hover .tooltip {
   opacity: 1;
-  transform: scale(1);
 }
 
-.group span::before {
-  content: "";
+.tooltip-trigger {
+  position: relative;
+  display: inline;
+}
+
+.tooltip-trigger .tooltip {
+  width: 100%;
+  background-color: rgb(105, 105, 105);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  opacity: 0;
+  transition: opacity 1s;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip-right {
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip-left {
+  top: -5px;
+  right: 105%;
+}
+
+.tooltip-top {
+  bottom: 105%;
+  left: 0%;
+}
+
+.tooltip-bottom {
+  top: 105%;
+  left: 0%;
+}
+
+.tooltip-trigger .tooltip-top::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgb(105, 105, 105) transparent transparent transparent;
+}
+
+.tooltip-trigger .tooltip-bottom::after {
+  content: " ";
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translate(-50%, 420%) rotate(45deg);
-  width: 8px;
-  height: 8px;
-  background-color: inherit;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgb(105, 105, 105) transparent;
+}
+
+.tooltip-trigger .tooltip-right::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent rgb(105, 105, 105) transparent transparent;
+}
+
+.tooltip-trigger .tooltip-left::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgb(105, 105, 105);
 }

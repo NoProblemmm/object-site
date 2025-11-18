@@ -1,15 +1,23 @@
-import React from "react";
+import React, { memo } from "react";
 import "./Tooltip.css";
-interface TooltipProps {
-  message: string;
-  children?: React.ReactNode;
-}
 
-export default function Tooltip({ message, children }: TooltipProps) {
+type Props = {
+  children: React.ReactNode;
+  title?: string;
+  position?: "top" | "bottom" | "left" | "right";
+};
+
+const Tooltip: React.FC<Props> = ({
+  children,
+  title = "Tooltip Text",
+  position = "top",
+}) => {
   return (
-    <div className="group relative flex">
+    <div className="tooltip-trigger">
       {children}
-      <span className="tooltip-content">{message}</span>
+      <div className={`tooltip tooltip-${position}`}>{title}</div>
     </div>
   );
-}
+};
+
+export default memo(Tooltip);

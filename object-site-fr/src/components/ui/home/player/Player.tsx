@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import { PlayerLogic } from "./hooks/PlayerLogic";
 import { PlayerMenu } from "./playerMenu/PlayerMenu";
 import { TrackChat } from "../trackChat/TrackChat";
+import Tooltip from "@components/ui/tooltip/Tooltip";
 import "./Player.css";
 
 export const Player = observer(() => {
@@ -41,18 +42,20 @@ export const Player = observer(() => {
         muted={isMute}
       />
       <div className="cover__container ">
-        <div
-          className={`cover img__container ${playerStore.isPlaying ? "cover__multi" : "img__static"}`}
-          draggable
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-        >
-          <img
-            src={currentTrack.image}
-            alt="Cover Image"
-            className="cover draggable "
-          />
-        </div>
+        <Tooltip title="Drag and drop me" position="bottom">
+          <div
+            className={`cover img__container ${playerStore.isPlaying ? "cover__multi" : "img__static"}`}
+            draggable
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+          >
+            <img
+              src={currentTrack.image}
+              alt="Cover Image"
+              className="cover draggable "
+            />
+          </div>
+        </Tooltip>
       </div>
       <div className="name__compose">
         <h3 className="title">{currentTrack.name}</h3>
