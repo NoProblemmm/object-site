@@ -3,6 +3,7 @@ import { playerStore } from "@store/player/Player.store";
 import { useSessionStore } from "@store/session/Session.store";
 import { PlayerLogic } from "../hooks/PlayerLogic";
 import "./PlayerMenu.css";
+
 export const PlayerMenu = observer(() => {
   const { currentTrack, handleAddTrack, handleDeleteTrack } = PlayerLogic();
 
