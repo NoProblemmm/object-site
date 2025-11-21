@@ -11,6 +11,8 @@
 
 .sider__container.active {
   width: 30%;
+  height: 61.3rem;
+  overflow-y: auto;
   display: block;
 }
 .rightsider__navigate {
