@@ -29,6 +29,16 @@ export interface ISignInResponse {
   refreshToken: string;
 }
 
+export interface IRequestApi<T> {
+  body: T;
+  limit?: number;
+}
+
+export interface IResponseApi<T> {
+  data?: T;
+  message?: string;
+}
+
 export interface IApiTokenProvider {
   accessToken: string;
   refreshToken: string;
