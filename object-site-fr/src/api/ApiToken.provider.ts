@@ -28,7 +28,7 @@ export class ApiTokenProvider implements IApiTokenProvider {
 
   refreshAccessToken = async () => {
     try {
-      const response = await Api().refreshToken();
+      const response = await Api().updateToken();
       if (response.accessToken && response.refreshToken) {
         return this.setToken(response.accessToken, response.refreshToken);
       } else {

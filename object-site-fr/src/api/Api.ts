@@ -1,17 +1,24 @@
 import { useApiTokenProvider } from "./ApiToken.provider";
-import { type ISignInRequest, type ISignUpRequest } from "./data-details";
+import {
+  type IRequestApi,
+  type ISignInRequest,
+  type ISignUpRequest,
+} from "./data-details";
 import { useApi } from "./hooks/useApi";
 
 export const Api = () => {
   const { POST, GET, DELETE } = useApi;
+  const accessToken = useApiTokenProvider.accessToken;
+  const refreshToken =
+    useApiTokenProvider.refreshToken || localStorage.getItem("refresh_token");
 
   // Авторизация
-  const signIn = async (data: ISignInRequest) => {
+  const signIn = async (data: IRequestApi<ISignInRequest>) => {
     const response = await POST(
       "signIn",
       {
-        email: data.email,
-        password: data.password,
+        email: data.body.email,
+        password: data.body.password,
       },
       {}
     );
@@ -19,13 +26,13 @@ export const Api = () => {
   };
 
   // Регистрация
-  const signUp = async (data: ISignUpRequest) => {
+  const signUp = async (data: IRequestApi<ISignUpRequest>) => {
     const response = await POST(
       "signUp",
       {
-        name: data.name,
-        email: data.email,
-        password: data.password,
+        name: data.body.name,
+        email: data.body.email,
+        password: data.body.password,
       },
       {}
     );
@@ -33,8 +40,7 @@ export const Api = () => {
   };
 
   // Обновление токена
-  const refreshToken = async () => {
-    const refreshToken = localStorage.getItem("refresh_token");
+  const updateToken = async () => {
     if (!refreshToken) {
       console.log("Not session!");
     }
@@ -50,9 +56,8 @@ export const Api = () => {
 
   // Получение треков пользователя
   const getMyTrack = async () => {
-    const token = useApiTokenProvider.accessToken;
     const headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     };
 
     try {
@@ -76,53 +81,48 @@ export const Api = () => {
 
   // Добавление трека в избранное
   const addMyTrack = async (trackId: number) => {
-    const token = useApiTokenProvider.accessToken;
     const response = POST(
       "add-mytrack",
       { trackId },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${accessToken}` } }
     );
     return response;
   };
 
   // Удаление трека из избранных
   const deleteMyTrack = (trackId: number) => {
-    const token = useApiTokenProvider.accessToken;
     const response = DELETE(
       "delete-mytrack",
       { trackId },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${accessToken}` } }
     );
     return response;
   };
 
   // Получить мой профиль
   const getMyProfile = () => {
-    const token = useApiTokenProvider.accessToken;
     const response = GET("getMyProfile", {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${accessToken}` },
     });
     return response;
   };
 
   // Запрос на композитора
   const requestComposerUser = (userId: number) => {
-    const token = useApiTokenProvider.accessToken;
     const response = POST(
       "requestComposeUser",
       { userId },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${accessToken}` } }
     );
     return response;
   };
 
   //!!! Изменение аватарки User (Не рабочий нужна DB)
   const setAvatarUser = (file: any) => {
-    const token = useApiTokenProvider.accessToken;
     const response = POST(
       "setAvatarUser",
       { file },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${accessToken}` } }
     );
     return response;
   };
@@ -133,7 +133,7 @@ export const Api = () => {
     getTrack,
     getMyTrack,
     searchTrack,
-    refreshToken,
+    updateToken,
     addMyTrack,
     deleteMyTrack,
     getMyProfile,
