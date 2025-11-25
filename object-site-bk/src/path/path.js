@@ -42,7 +42,7 @@ export const signUp = async (req, res) => {
         admin: false,
         requestComposer: false,
       });
-      res.json({ success: true });
+      res.status(201).json({ success: true });
     } else {
       res.json({ success: false, message: "Problem signup user..." });
     }
@@ -62,13 +62,13 @@ export const refreshMyToken = (req, res) => {
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
     if (decoded.exp <= Math.floor(Date.now() / 1000)) {
       const tokens = generateTokens(decoded.userId, decoded.email);
-      return res.json(tokens);
+      return res.status(201).json(tokens);
     } else {
       const newAccessToken = generateTokens(
         decoded.userId,
         decoded.email
       ).accessToken;
-      return res.json({ accessToken: newAccessToken });
+      return res.status(201).json({ accessToken: newAccessToken });
     }
   } catch (err) {
     res.status(401).json({ message: "Incorrect or outdated refresh token" });
@@ -88,7 +88,7 @@ export const track = (req, res) => {
       isAuthor: track.isAuthor,
     }));
 
-    return res.json(tracks);
+    return res.status(200).json(tracks);
   } catch {
     res.status(401).json({ message: "Error receiving tracks" });
   }
