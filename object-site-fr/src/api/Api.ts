@@ -1,9 +1,5 @@
 import { useApiTokenProvider } from "./ApiToken.provider";
-import {
-  type IRequestApi,
-  type ISignInRequest,
-  type ISignUpRequest,
-} from "./data-details";
+import { type ISignInRequest, type ISignUpRequest } from "./data-details";
 import { useApi } from "./hooks/useApi";
 
 export const Api = () => {
@@ -13,12 +9,12 @@ export const Api = () => {
     useApiTokenProvider.refreshToken || localStorage.getItem("refresh_token");
 
   // Авторизация
-  const signIn = async (data: IRequestApi<ISignInRequest>) => {
+  const signIn = async (data: ISignInRequest) => {
     const response = await POST(
       "signIn",
       {
-        email: data.body.email,
-        password: data.body.password,
+        email: data.email,
+        password: data.password,
       },
       {}
     );
@@ -26,13 +22,13 @@ export const Api = () => {
   };
 
   // Регистрация
-  const signUp = async (data: IRequestApi<ISignUpRequest>) => {
+  const signUp = async (data: ISignUpRequest) => {
     const response = await POST(
       "signUp",
       {
-        name: data.body.name,
-        email: data.body.email,
-        password: data.body.password,
+        name: data.name,
+        email: data.email,
+        password: data.password,
       },
       {}
     );

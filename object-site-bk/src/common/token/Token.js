@@ -9,13 +9,17 @@ const ACCESS_TOKEN_EXPIRATION = "15m";
 const REFRESH_TOKEN_EXPIRATION = "7d";
 
 export function generateTokens(userId, email) {
-  const accessToken = jwt.sign({ userId }, ACCESS_TOKEN_SECRET, {
-    expiresIn: ACCESS_TOKEN_EXPIRATION,
-  });
-  const refreshToken = jwt.sign({ userId, email }, REFRESH_TOKEN_SECRET, {
-    expiresIn: REFRESH_TOKEN_EXPIRATION,
-  });
-  return { accessToken, refreshToken };
+  try {
+    const accessToken = jwt.sign({ userId }, ACCESS_TOKEN_SECRET, {
+      expiresIn: ACCESS_TOKEN_EXPIRATION,
+    });
+    const refreshToken = jwt.sign({ userId, email }, REFRESH_TOKEN_SECRET, {
+      expiresIn: REFRESH_TOKEN_EXPIRATION,
+    });
+    return { accessToken, refreshToken };
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export const authenticateJWT = (req, res, next) => {
