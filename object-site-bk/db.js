@@ -14,15 +14,15 @@ export const db = {
   query: async function (text, params) {
     const client = await pool.connect();
     try {
-      const startTime = Date.now(); // Отмечаем начало выполнения
+      const startTime = Date.now();
       const res = await client.query(text, params);
-      const endTime = Date.now(); // Фиксируем завершение
+      const endTime = Date.now();
 
-      console.log(`Query execution time: ${endTime - startTime}ms.`); // Показываем время выполнения
-      console.log("Query result:", JSON.stringify(res)); // Печатаем полное содержимое результата
+      console.log(`Query execution time: ${endTime - startTime}ms.`);
+      console.log("Query result:", JSON.stringify(res));
       return res.rows;
     } catch (err) {
-      console.error("Database Error:", err.stack || err.message); // Подробная трассировка ошибок
+      console.error("Database Error:", err.stack || err.message);
       throw err;
     } finally {
       client.release();
