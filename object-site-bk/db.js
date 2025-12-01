@@ -1,4 +1,5 @@
 import { Pool } from "pg";
+import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,6 +10,17 @@ const pool = new Pool({
   password: `${process.env.DATA_BASE_PASSWORD}`,
   port: `${process.env.DATA_BASE_PORT}`,
 });
+
+export const dbSequ = new Sequelize(
+  process.env.DATA_BASE_DB,
+  process.env.DATA_BASE_USER,
+  process.env.DATA_BASE_PASSWORD,
+  {
+    dialect: `postgres`,
+    host: process.env.DATA_BASE_HOST,
+    port: process.env.DATA_BASE_PORT,
+  }
+);
 
 export const db = {
   query: async function (text, params) {
