@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export type SetterOrUpdater<T> = ((value: T) => T) | T;
+export type TSetter<T> = ((value: T) => T) | T;
 
 export function useLocalStorage<T>(
   key: string,
@@ -23,7 +23,7 @@ export function useLocalStorage<T>(
 
   return [
     state,
-    (newValue: SetterOrUpdater<T>) => {
+    (newValue: TSetter<T>) => {
       if (typeof newValue === "function") {
         setState(newValue);
       } else {
