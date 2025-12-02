@@ -113,7 +113,7 @@ export const Api = () => {
     return response;
   };
 
-  //!!! Изменение аватарки User (Не рабочий нужна DB)
+  //!!! Изменение аватарки User (Не рабочий - нужна DB)
   const setAvatarUser = (file: any) => {
     const response = POST(
       "setAvatarUser",

@@ -1,6 +1,7 @@
 import { authorizeUser, validationSignUp } from "../service/authorization.js";
 import { Track, UserTrack, User } from "../../Data.js";
 import { generateTokens } from "../common/token/Token.js";
+import { db } from "../../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -24,6 +25,30 @@ export const signIn = async (req, res) => {
   } catch {
     res.status(500).json({ error: "Authorization error" });
   }
+
+  // Data Base
+
+  // try {
+  //   const { email } = req.body;
+  //   const result = await db.query(`
+  //     SELECT *
+  //     FROM "user"
+  //     WHERE email='${email}'
+  //     LIMIT 1
+  //   `);
+  //   if (result.length > 0) {
+  //     const userData = result[0];
+  //     res.json({
+  //       message: "Пользователь существует",
+  //       userData,
+  //     });
+  //   } else {
+  //     res.json({ message: "Пользователь не найден" });
+  //   }
+  // } catch (e) {
+  //   console.error(e.stack || e.message);
+  //   res.status(500).json({ error: "Ошибка при проверке пользователя." });
+  // }
 };
 
 // Обработка регистрации
